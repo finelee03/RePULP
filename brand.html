@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RePULP — Brand Philosophy & ESG</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ========================
+       Page Hero
+       ======================== */
+    .page-hero {
+      height: 60vh;
+      min-height: 440px;
+      background: var(--green-dark);
+      display: flex;
+      align-items: flex-end;
+      padding: 0 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      right: -10%;
+      top: -20%;
+      width: 70vw;
+      height: 70vw;
+      background: radial-gradient(ellipse,
+        rgba(107,143,113,0.20) 0%,
+        transparent 65%);
+      border-radius: 60% 40% 50% 70% / 50% 60% 40% 60%;
+      animation: breathe 10s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.05); }
+    }
+
+    .page-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .page-hero .section-label { color: var(--green-light); }
+    .page-hero h1 {
+      color: var(--white);
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      max-width: 700px;
+    }
+
+    .page-hero h1 em { color: var(--earth); }
+
+    /* ========================
+       Brand Story
+       ======================== */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .story-sidebar {
+      position: sticky;
+      top: 7rem;
+    }
+
+    .story-sidebar .big-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--green-dark);
+    }
+
+    .story-sidebar .big-quote em {
+      font-style: italic;
+      color: var(--earth);
+    }
+
+    .story-sidebar .quote-attr {
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      color: var(--text-light);
+      text-transform: uppercase;
+    }
+
+    .story-body h3 {
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .story-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+    }
+
+    .story-highlight {
+      border-left: 3px solid var(--earth);
+      padding: 1rem 1.6rem;
+      margin: 2rem 0;
+      background: rgba(196,149,106,0.07);
+    }
+
+    .story-highlight p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin: 0;
+    }
+
+    /* ========================
+       Philosophy Cards
+       ======================== */
+    .philosophy-bg {
+      background: var(--cream-deep);
+      border-top: 1px solid rgba(58,82,64,0.08);
+      border-bottom: 1px solid rgba(58,82,64,0.08);
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 3.5rem;
+      background: rgba(58,82,64,0.1);
+    }
+
+    .philo-card {
+      background: var(--cream-deep);
+      padding: 3rem 2.4rem;
+      transition: background 0.3s;
+      cursor: default;
+    }
+
+    .philo-card:hover {
+      background: var(--white);
+    }
+
+    .philo-icon {
+      width: 52px; height: 52px;
+      border: 1.5px solid var(--green-mid);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.6rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .philo-card:hover .philo-icon {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+    }
+
+    .philo-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .philo-card p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+
+    /* ========================
+       ESG Loop Diagram
+       ======================== */
+    .esg-section {
+      background: var(--green-dark);
+      padding: 7rem 4rem;
+    }
+
+    .esg-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .esg-section .section-label { color: var(--green-light); }
+    .esg-section h2, .esg-section .divider-text { color: var(--white); }
+    .esg-section .divider { background: var(--green-mid); }
+
+    .esg-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 4rem;
+    }
+
+    /* --- Diagram --- */
+    .loop-diagram {
+      position: relative;
+    }
+
+    .loop-track {
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+    }
+
+    .loop-track-inner {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* Outer ring */
+    .orbit-ring {
+      position: absolute;
+      inset: 5%;
+      border: 1.5px dashed rgba(181,206,172,0.35);
+      border-radius: 50%;
+    }
+
+    /* Center */
+    .orbit-center {
+      position: absolute;
+      inset: 30%;
+      background: linear-gradient(135deg, rgba(107,143,113,0.6), rgba(58,82,64,0.9));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      border: 2px solid rgba(181,206,172,0.3);
+    }
+
+    .orbit-center .center-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    .orbit-center .center-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-top: 0.3rem;
+    }
+
+    /* Orbit steps */
+    .orbit-step {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: default;
+    }
+
+    .orbit-dot {
+      width: 58px; height: 58px;
+      background: rgba(246,241,232,0.1);
+      border: 1.5px solid rgba(181,206,172,0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.3s;
+      backdrop-filter: blur(4px);
+    }
+
+    .orbit-step:hover .orbit-dot {
+      background: var(--earth);
+      border-color: var(--earth);
+      transform: scale(1.15);
+    }
+
+    .orbit-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      text-align: center;
+      max-width: 70px;
+      line-height: 1.3;
+    }
+
+    /* Arrows between steps */
+    .orbit-arrow {
+      position: absolute;
+      width: 20px; height: 20px;
+      border-top: 1.5px solid rgba(181,206,172,0.4);
+      border-right: 1.5px solid rgba(181,206,172,0.4);
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    /* Step list */
+    .esg-steps {
+      list-style: none;
+    }
+
+    .esg-step {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      padding: 1.4rem 0;
+      border-bottom: 1px solid rgba(181,206,172,0.15);
+    }
+
+    .esg-step:last-child { border-bottom: none; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border: 1px solid var(--green-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: var(--green-light);
+    }
+
+    .step-body h4 {
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .step-body p {
+      font-size: 0.85rem;
+      color: var(--green-light);
+      line-height: 1.6;
+    }
+
+    /* ========================
+       ESG Pillars
+       ======================== */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .pillar {
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(58,82,64,0.12);
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .pillar:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px var(--shadow);
+    }
+
+    .pillar-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      line-height: 1;
+      color: rgba(58,82,64,0.07);
+      position: absolute;
+      right: 1rem;
+      top: 0.5rem;
+    }
+
+    .pillar h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--green-dark);
+    }
+
+    .pillar-subtitle {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 1rem;
+    }
+
+    .pillar p {
+      font-size: 0.9rem;
+      line-height: 1.72;
+    }
+
+    .pillar ul {
+      margin-top: 1rem;
+      list-style: none;
+    }
+
+    .pillar ul li {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      padding: 0.3rem 0;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .pillar ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--green-mid);
+      font-size: 0.75rem;
+    }
+
+    /* ========================
+       Business Model
+       ======================== */
+    .biz-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .biz-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .biz-node {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .biz-node:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 21px;
+      top: 44px;
+      width: 1px;
+      height: calc(100% - 12px);
+      background: linear-gradient(to bottom, var(--green-mid), rgba(107,143,113,0.2));
+    }
+
+    .biz-dot {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: var(--green-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .biz-text {
+      padding: 0.3rem 0 2.5rem;
+    }
+
+    .biz-text h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--green-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .biz-text p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    /* ========================
+       End of Life
+       ======================== */
+    .eol-section {
+      text-align: center;
+      background: var(--cream-deep);
+      padding: 7rem 4rem;
+      border-top: 1px solid rgba(58,82,64,0.08);
+    }
+
+    .eol-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      margin: 3.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .eol-stage {
+      text-align: center;
+      padding: 1.5rem;
+      max-width: 160px;
+    }
+
+    .eol-stage .eol-icon {
+      width: 68px; height: 68px;
+      margin: 0 auto 1rem;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 20px var(--shadow);
+    }
+
+    .eol-stage h4 {
+      font-size: 0.9rem;
+      color: var(--green-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .eol-stage p {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    .eol-arrow {
+      font-size: 1.4rem;
+      color: var(--green-mid);
+      opacity: 0.5;
+      padding: 0 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 0 1.6rem 3.5rem; }
+      .story-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .story-sidebar { position: static; }
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .esg-section { padding: 5rem 1.6rem; }
+      .esg-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .biz-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .eol-section { padding: 5rem 1.6rem; }
+      .eol-visual { gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">Re<span>PULP</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="brand.html" class="active">Brand</a></li>
+      <li><a href="products.html">Products</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="section-label">Brand Philosophy</div>
+      <h1>자연이 버린 것,<br>자연으로 <em>돌아가는 것</em></h1>
+    </div>
+  </section>
+
+  <!-- BRAND STORY -->
+  <div class="section">
+    <div class="story-grid">
+      <div class="story-sidebar fade-up">
+        <div class="big-quote">
+          "가장<br>가까운<br>곳에서<br><em>시작</em>"
+        </div>
+        <div class="quote-attr">RePULP Brand Manifesto</div>
+      </div>
+
+      <div class="story-body fade-up">
+        <h3>브랜드 탄생</h3>
+        <p>
+          매일 수십 억 개의 계란이 소비됩니다. 그리고 그 껍데기를 감싸던 종이 계란판도 함께 버려집니다.
+          가볍고 가공하기 쉬운 재료, 그러나 어디에나 있는 이 소재를 우리는 단순한 폐기물로 봐 왔습니다.
+        </p>
+        <p>
+          RePULP는 그 시선을 뒤집습니다. 계란판을 물에 불려 펄프로 만들고, 밀가루풀이라는 전통적인 천연 결합제와 섞으면
+          어떤 형태로든 빚을 수 있는 새로운 소재가 탄생합니다.
+          화학 첨가제도, 합성 수지도 필요 없습니다.
+        </p>
+
+        <div class="story-highlight">
+          <p>
+            "우리가 만드는 것은 제품이 아니라,
+            버려질 것들이 새 삶을 얻는 과정입니다."
+          </p>
+        </div>
+
+        <h3>왜 지역에서 수거하는가</h3>
+        <p>
+          ESG 경영에서 운송 탄소는 간과되기 쉬운 영역입니다. RePULP는 원료 수거 반경을 최소화합니다.
+          동네 슈퍼, 카페, 양계 농가에서 수거된 계란판은 수십 킬로미터 이내에서 제품이 되어
+          같은 지역에서 소비됩니다. 이것이 우리가 말하는 폐쇄 루프(Closed Loop)입니다.
+        </p>
+        <p>
+          수거 파트너로 참여하는 지역 사업체는 수거 인센티브를 받고,
+          소비자는 자신이 사는 동네에서 만들어진 제품을 씁니다.
+          이 짧은 동선이 운송 에너지를 절약하고 지역 공동체를 강화합니다.
+        </p>
+
+        <h3>끝이 곧 시작</h3>
+        <p>
+          RePULP 제품의 수명이 다하면, 합성 코팅 하나 없는 순수한 식물성 소재는
+          물에 녹거나 흙에 묻히면서 완전히 분해됩니다.
+          그 영양분은 다음 밀이 자라는 땅이 되고, 다음 닭이 사는 농장 옆 토양이 됩니다.
+          순환이 완결됩니다.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY CARDS -->
+  <div class="philosophy-bg">
+    <div class="section">
+      <div class="section-label">Core Philosophy</div>
+      <h2 class="section-title">세 가지 믿음</h2>
+      <div class="divider"></div>
+
+      <div class="philosophy-grid">
+        <div class="philo-card fade-up">
+          <div class="philo-icon">⊕</div>
+          <h3>지역성 (Locality)</h3>
+          <p>
+            좋은 소재는 멀리서 오지 않아도 됩니다. 가장 가까운 곳에서 버려지는 것들이
+            가장 풍부한 자원입니다. 짧은 공급망은 탄소 발자국을 줄이고
+            지역 경제를 순환시킵니다.
+          </p>
+        </div>
+        <div class="philo-card fade-up">
+          <div class="philo-icon">◎</div>
+          <h3>순수성 (Purity)</h3>
+          <p>
+            계란판, 물, 밀가루. 이것이 전부입니다.
+            합성 수지, 방부제, 화학 결합제 없이도 충분히 아름답고 단단한 소재를 만들 수 있습니다.
+            인위적인 것은 자연에서 분해되지 않습니다.
+          </p>
+        </div>
+        <div class="philo-card fade-up">
+          <div class="philo-icon">♻</div>
+          <h3>순환성 (Circularity)</h3>
+          <p>
+            제품은 언제나 폐기를 전제로 설계됩니다.
+            RePULP의 제품은 사용 후 퇴비화되거나 물에 용해되어
+            다시 자연의 일부가 됩니다. 쓰레기로 끝나지 않습니다.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESG LOOP DIAGRAM -->
+  <section class="esg-section">
+    <div class="esg-inner">
+      <div class="section-label">ESG Closed Loop</div>
+      <h2 class="section-title">RePULP 폐쇄 순환 시스템</h2>
+      <div class="divider"></div>
+
+      <div class="esg-layout">
+        <!-- Diagram -->
+        <div class="loop-diagram fade-up">
+          <div class="loop-track">
+            <div class="loop-track-inner">
+              <div class="orbit-ring"></div>
+              <div class="orbit-center">
+                <div class="center-label">RePULP<br>Closed Loop</div>
+                <div class="center-sub">Local · Pure · Circular</div>
+              </div>
+
+              <!-- Steps placed on circle: angle 0°=top, clockwise -->
+              <!-- 6 nodes at 60° intervals, starting from top -->
+              <div class="orbit-step" style="top:5%; left:50%">
+                <div class="orbit-dot">🥚</div>
+                <div class="orbit-label">계란판 발생</div>
+              </div>
+              <div class="orbit-step" style="top:27%; left:93%">
+                <div class="orbit-dot">🏠</div>
+                <div class="orbit-label">지역 수거</div>
+              </div>
+              <div class="orbit-step" style="top:73%; left:93%">
+                <div class="orbit-dot">💧</div>
+                <div class="orbit-label">해리 & 혼합</div>
+              </div>
+              <div class="orbit-step" style="top:95%; left:50%">
+                <div class="orbit-dot">🎨</div>
+                <div class="orbit-label">성형 & 건조</div>
+              </div>
+              <div class="orbit-step" style="top:73%; left:7%">
+                <div class="orbit-dot">🎁</div>
+                <div class="orbit-label">지역 유통</div>
+              </div>
+              <div class="orbit-step" style="top:27%; left:7%">
+                <div class="orbit-dot">🌱</div>
+                <div class="orbit-label">퇴비화·분해</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Steps List -->
+        <div class="fade-up">
+          <ul class="esg-steps">
+            <li class="esg-step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <h4>지역 내 계란판 발생 및 수거 협약</h4>
+                <p>반경 50km 이내 농가, 슈퍼마켓, 카페와 수거 협약을 맺습니다. 수거 파트너는 인센티브(수거량 기반 할인 쿠폰 또는 포인트)를 받아 지속 참여 동기가 형성됩니다.</p>
+              </div>
+            </li>
+            <li class="esg-step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <h4>수거 → 공방 직배송 (짧은 동선)</h4>
+                <p>수거 거점에서 공방까지의 이동을 최소화합니다. 운송 거리 단축이 곧 탄소 절감입니다. 로컬 자전거 수거단 또는 정기 루트 차량을 활용합니다.</p>
+              </div>
+            </li>
+            <li class="esg-step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <h4>천연 원료만으로 제작</h4>
+                <p>계란판 펄프 + 밀가루풀 결합. 화학 경화제, 합성 코팅, 방부제 없음. 공정 전체에서 유해 화학 물질이 발생하지 않습니다.</p>
+              </div>
+            </li>
+            <li class="esg-step">
+              <div class="step-num">4</div>
+              <div class="step-body">
+                <h4>지역 소비자에게 유통</h4>
+                <p>제품 역시 같은 지역권에서 소비됩니다. 온라인 + 로컬 편집샵 채널을 통해 유통하며, 구매 고객에게도 사용 후 반납 프로그램을 제공합니다.</p>
+              </div>
+            </li>
+            <li class="esg-step">
+              <div class="step-num">5</div>
+              <div class="step-body">
+                <h4>사용 후 완전 생분해</h4>
+                <p>화학 물질이 없어 일반 퇴비함이나 텃밭에 바로 넣을 수 있습니다. 토양 미생물이 분해하며 유기물로 환원됩니다. 쓰레기 매립이 필요 없습니다.</p>
+              </div>
+            </li>
+            <li class="esg-step">
+              <div class="step-num">6</div>
+              <div class="step-body">
+                <h4>토양 → 농장 → 계란판으로 돌아옴</h4>
+                <p>분해된 유기물은 토양을 풍요롭게 하고, 그 땅에서 밀이 자라고 닭이 자랍니다. 같은 지역 안에서 물질이 순환하는 진정한 폐쇄 루프가 완성됩니다.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESG PILLARS -->
+  <div class="section">
+    <div class="section-label">ESG Management</div>
+    <h2 class="section-title">환경·사회·거버넌스</h2>
+    <div class="divider"></div>
+
+    <div class="pillars-grid">
+      <div class="pillar fade-up">
+        <div class="pillar-letter">E</div>
+        <div class="pillar-subtitle">Environment</div>
+        <h3>환경</h3>
+        <p>생산·유통·폐기 전 단계에서 환경 영향을 최소화합니다.</p>
+        <ul>
+          <li>원료 100% 재활용 폐기물 (계란판)</li>
+          <li>합성 화학 물질 사용 Zero</li>
+          <li>공정 폐수 최소화 (자연 건조)</li>
+          <li>제품 전 주기 생분해 가능</li>
+          <li>단거리 공급망으로 운송 탄소 절감</li>
+        </ul>
+      </div>
+      <div class="pillar fade-up">
+        <div class="pillar-letter">S</div>
+        <div class="pillar-subtitle">Social</div>
+        <h3>사회</h3>
+        <p>지역 공동체와 함께 성장하는 비즈니스 모델을 추구합니다.</p>
+        <ul>
+          <li>지역 수거 파트너 인센티브 시스템</li>
+          <li>소규모 농가·소상공인 협력</li>
+          <li>친환경 교육 워크숍 정기 운영</li>
+          <li>지역 일자리 창출 (수거·제작·유통)</li>
+          <li>학교·기관 교육 키트 공급</li>
+        </ul>
+      </div>
+      <div class="pillar fade-up">
+        <div class="pillar-letter">G</div>
+        <div class="pillar-subtitle">Governance</div>
+        <h3>거버넌스</h3>
+        <p>투명한 공정과 지속 가능한 사업 구조를 만듭니다.</p>
+        <ul>
+          <li>연간 환경 영향 보고서 공개</li>
+          <li>수거량·탄소 절감량 실시간 공유</li>
+          <li>파트너사와 공정 수익 배분</li>
+          <li>소비자 반납 프로그램 운영</li>
+          <li>사용 소재 성분 전면 공개</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUSINESS MODEL FLOW -->
+  <div class="philosophy-bg">
+    <div class="section">
+      <div class="biz-grid">
+        <div class="fade-up">
+          <div class="section-label">Business Model</div>
+          <h2 class="section-title">지속 가능한<br>사업 구조</h2>
+          <div class="divider"></div>
+          <p>RePULP의 비즈니스는 친환경 조합이 수거하는 방식과 동일한 구조를 따릅니다. 수거 파트너와 소비자 모두가 순환에 참여하고 보상받는 생태계를 만듭니다.</p>
+        </div>
+
+        <div class="biz-flow fade-up">
+          <div class="biz-node">
+            <div class="biz-dot">🏢</div>
+            <div class="biz-text">
+              <h4>협약 파트너 수거 네트워크</h4>
+              <p>슈퍼, 카페, 농가와 수거 협약. 정기 수거 루트로 운영 효율화. 파트너에게 수거량 기반 포인트 제공.</p>
+            </div>
+          </div>
+          <div class="biz-node">
+            <div class="biz-dot">⚙️</div>
+            <div class="biz-text">
+              <h4>소규모 분산 공방 제작</h4>
+              <p>중앙 집중 공장 없이, 지역 내 소규모 공방 네트워크로 운영. 제작자는 기술 교육 후 파트너 공방으로 참여.</p>
+            </div>
+          </div>
+          <div class="biz-node">
+            <div class="biz-dot">🛍️</div>
+            <div class="biz-text">
+              <h4>온·오프라인 유통 채널</h4>
+              <p>브랜드 자사몰 + 지역 편집샵 + 팝업 스토어. 구매 고객에게 사용 후 반납 인센티브 제공.</p>
+            </div>
+          </div>
+          <div class="biz-node">
+            <div class="biz-dot">🌐</div>
+            <div class="biz-text">
+              <h4>B2B 솔루션 확장</h4>
+              <p>기업·기관 친환경 굿즈 제작 수주. 학교 교육 키트 납품. 포장재 대체 솔루션 제공.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- END OF LIFE -->
+  <div class="eol-section">
+    <div class="section-label" style="text-align:center">End of Life</div>
+    <h2 class="section-title">폐기할 때,<br>다시 땅으로</h2>
+    <div class="divider" style="margin: 1.5rem auto 2rem;"></div>
+    <p style="max-width:560px; margin:0 auto 0">
+      RePULP 제품에는 화학 코팅도, 합성 수지도 없습니다.
+      수명이 다하면 그대로 퇴비함에 넣거나 땅에 묻으면 됩니다.
+      미생물이 분해해 토양 유기물로 돌아갑니다.
+    </p>
+
+    <div class="eol-visual">
+      <div class="eol-stage">
+        <div class="eol-icon">🎁</div>
+        <h4>사용</h4>
+        <p>제품으로 생활 속에서 사용</p>
+      </div>
+      <div class="eol-arrow">→</div>
+      <div class="eol-stage">
+        <div class="eol-icon">💧</div>
+        <h4>물에 용해</h4>
+        <p>또는 직접 퇴비함 투입</p>
+      </div>
+      <div class="eol-arrow">→</div>
+      <div class="eol-stage">
+        <div class="eol-icon">🦠</div>
+        <h4>미생물 분해</h4>
+        <p>화학 물질 없이 완전 분해</p>
+      </div>
+      <div class="eol-arrow">→</div>
+      <div class="eol-stage">
+        <div class="eol-icon">🌱</div>
+        <h4>토양 환원</h4>
+        <p>유기물이 되어 땅을 풍요롭게</p>
+      </div>
+      <div class="eol-arrow">→</div>
+      <div class="eol-stage">
+        <div class="eol-icon">🌾</div>
+        <h4>다음 순환</h4>
+        <p>밀·닭이 자라는 토양으로</p>
+      </div>
+    </div>
+
+    <a href="products.html" class="btn btn-filled" style="margin-top:2rem"><span>제품 보러 가기 →</span></a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo">RePULP</div>
+      <p>계란판과 밀가루풀로<br>자연 소재를 빚는 브랜드</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="brand.html">Brand Story</a></li>
+        <li><a href="products.html">Products</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Values</h4>
+      <ul>
+        <li><a href="#">Local Loop System</a></li>
+        <li><a href="#">Zero Chemical Process</a></li>
+        <li><a href="#">Fully Compostable</a></li>
+        <li><a href="#">ESG Management</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2026 RePULP. All rights reserved.</p>
+    <p>Made from egg cartons & flour paste — back to earth.</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

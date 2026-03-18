@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RePULP — Products</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ========================
+       Page Hero
+       ======================== */
+    .page-hero {
+      height: 52vh;
+      min-height: 380px;
+      background: var(--stone-dark);
+      display: flex;
+      align-items: flex-end;
+      padding: 0 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(107,91,78,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 70%, rgba(90,112,82,0.18) 0%, transparent 70%);
+    }
+
+    /* Pulp fibre texture */
+    .hero-texture::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 1px,
+        transparent 1px, transparent 6px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.15) 0px, rgba(255,255,255,0.15) 1px,
+        transparent 1px, transparent 8px
+      );
+    }
+
+    .page-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .page-hero .section-label { color: var(--moss-light); }
+    .page-hero h1 { color: var(--white); max-width: 600px; }
+    .page-hero h1 em { color: var(--soil-light); font-style: italic; }
+
+    /* ========================
+       Material Filter Tabs
+       ======================== */
+    .material-tabs {
+      background: var(--white);
+      border-bottom: 1px solid rgba(107,91,78,0.1);
+      position: sticky;
+      top: 64px;
+      z-index: 50;
+    }
+
+    .tabs-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      display: flex;
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1.2rem 2rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      transition: all 0.25s;
+    }
+
+    .tab-btn .swatch {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover { color: var(--text-dark); }
+
+    .tab-btn[data-mat="all"].active   { border-bottom-color: var(--stone-dark); }
+    .tab-btn[data-mat="stone"].active { border-bottom-color: var(--stone-mid); }
+    .tab-btn[data-mat="moss"].active  { border-bottom-color: var(--moss-dark); }
+    .tab-btn[data-mat="soil"].active  { border-bottom-color: var(--soil-dark); }
+
+    /* ========================
+       Material Key
+       ======================== */
+    .material-key {
+      background: var(--cream-deep);
+      padding: 3.5rem 4rem;
+      border-bottom: 1px solid rgba(107,91,78,0.08);
+    }
+
+    .material-key-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .key-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .key-card {
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      padding: 1.6rem;
+      background: var(--white);
+      border: 1px solid rgba(107,91,78,0.08);
+    }
+
+    .key-swatch {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .key-swatch.stone {
+      background: radial-gradient(circle at 35% 35%, #D6CBBC, #B4A490, #9A8E7E);
+    }
+
+    .key-swatch.moss {
+      background: radial-gradient(circle at 35% 35%, #9DB88A, #6E8F60, #4E6B44);
+    }
+
+    .key-swatch.soil {
+      background: radial-gradient(circle at 35% 35%, #A07850, #7A5535, #5C3D20);
+    }
+
+    .key-info h4 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .key-info .key-ingredient {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 0.5rem;
+    }
+
+    .key-info p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* ========================
+       Products Grid
+       ======================== */
+    .products-section {
+      padding: 5rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(107,91,78,0.08);
+    }
+
+    .product-card {
+      background: var(--white);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .product-card:hover { background: var(--cream); }
+
+    .product-visual {
+      width: 100%;
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Stone material */
+    .product-card[data-material="stone"] .product-visual {
+      background:
+        radial-gradient(ellipse 70% 70% at 30% 30%, #D6CBBC 0%, #B4A490 40%, #9A8E7E 80%, #887870 100%);
+    }
+
+    /* Moss material */
+    .product-card[data-material="moss"] .product-visual {
+      background:
+        radial-gradient(ellipse 70% 70% at 30% 30%, #B0C99E 0%, #7EA06A 40%, #5A7A4A 80%, #3E5C35 100%);
+    }
+
+    /* Soil material */
+    .product-card[data-material="soil"] .product-visual {
+      background:
+        radial-gradient(ellipse 70% 70% at 30% 30%, #B0885A 0%, #8A6240 40%, #6A4528 80%, #4C2E14 100%);
+    }
+
+    /* Fiber texture overlay */
+    .product-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          30deg,
+          transparent 0px, transparent 3px,
+          rgba(255,255,255,0.04) 3px, rgba(255,255,255,0.04) 4px
+        ),
+        repeating-linear-gradient(
+          -30deg,
+          transparent 0px, transparent 4px,
+          rgba(0,0,0,0.03) 4px, rgba(0,0,0,0.03) 5px
+        );
+    }
+
+    /* Product silhouette */
+    .product-shape {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 55%;
+      max-width: 180px;
+    }
+
+    .product-shape svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Hover overlay */
+    .product-hover-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30,35,24,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .product-card:hover .product-hover-overlay {
+      opacity: 1;
+    }
+
+    .hover-cta {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 0.6rem 1.4rem;
+    }
+
+    .product-info {
+      padding: 1.6rem;
+      border-top: 1px solid rgba(107,91,78,0.08);
+    }
+
+    .product-material-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .product-material-tag .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+
+    .product-material-tag .dot.stone { background: var(--stone-mid); }
+    .product-material-tag .dot.moss  { background: var(--moss-mid); }
+    .product-material-tag .dot.soil  { background: var(--soil-mid); }
+
+    .product-info h3 {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .product-info p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* hidden class */
+    .product-card.hidden {
+      display: none;
+    }
+
+    /* ========================
+       Modal Overlay
+       ======================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(20,24,18,0.7);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      background: var(--white);
+      max-width: 860px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      transform: translateY(20px) scale(0.98);
+      transition: transform 0.35s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    /* scrollbar */
+    .modal-card::-webkit-scrollbar { width: 4px; }
+    .modal-card::-webkit-scrollbar-track { background: transparent; }
+    .modal-card::-webkit-scrollbar-thumb { background: var(--stone-mid); border-radius: 2px; }
+
+    .modal-visual {
+      position: sticky;
+      top: 0;
+      height: 100%;
+      min-height: 400px;
+    }
+
+    .modal-visual-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-visual-inner .modal-product-shape {
+      width: 60%;
+      max-width: 200px;
+    }
+
+    .modal-visual-inner .modal-product-shape svg {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.25));
+    }
+
+    .modal-body {
+      padding: 3rem 2.5rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.4rem;
+      right: 1.4rem;
+      width: 38px; height: 38px;
+      background: rgba(107,91,78,0.12);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--text-dark);
+      transition: background 0.2s;
+      z-index: 10;
+    }
+
+    .modal-close:hover { background: var(--stone-mid); color: var(--white); }
+
+    .modal-material-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.8rem;
+    }
+
+    .modal-material-tag .swatch {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+
+    .modal-body h2 {
+      font-size: 1.8rem;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .modal-body .modal-sub {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 1.6rem;
+    }
+
+    .modal-divider {
+      width: 36px; height: 1px;
+      background: var(--earth);
+      margin-bottom: 1.6rem;
+    }
+
+    .modal-body p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      margin-bottom: 1.4rem;
+    }
+
+    .modal-section-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Process steps */
+    .process-steps {
+      list-style: none;
+    }
+
+    .process-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(107,91,78,0.08);
+    }
+
+    .process-step:last-child { border-bottom: none; }
+
+    .process-num {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      background: var(--green-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .process-text h5 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .process-text p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin: 0;
+      line-height: 1.55;
+    }
+
+    /* Sustainability badge */
+    .modal-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.6rem;
+    }
+
+    .modal-badge {
+      padding: 0.35rem 0.9rem;
+      background: rgba(58,82,64,0.07);
+      border: 1px solid rgba(58,82,64,0.15);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--green-dark);
+    }
+
+    /* ========================
+       Responsive
+       ======================== */
+    @media (max-width: 900px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 0 1.6rem 3.5rem; }
+      .tabs-inner { padding: 0 1rem; overflow-x: auto; }
+      .material-key { padding: 2.5rem 1.6rem; }
+      .key-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .products-section { padding: 3rem 1.6rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .modal-card { grid-template-columns: 1fr; }
+      .modal-visual { min-height: 240px; position: relative; }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-logo">Re<span>PULP</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="brand.html">Brand</a></li>
+      <li><a href="products.html" class="active">Products</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="hero-texture"></div>
+    <div class="page-hero-inner">
+      <div class="section-label">Product Collection</div>
+      <h1>자연 소재가 빚은<br><em>세 가지 표정</em></h1>
+    </div>
+  </section>
+
+  <!-- MATERIAL FILTER TABS -->
+  <div class="material-tabs">
+    <div class="tabs-inner">
+      <button class="tab-btn active" data-mat="all">
+        <span>All</span>
+      </button>
+      <button class="tab-btn" data-mat="stone">
+        <div class="swatch" style="background: radial-gradient(circle, #D6CBBC, #9A8E7E)"></div>
+        <span>Stone</span>
+      </button>
+      <button class="tab-btn" data-mat="moss">
+        <div class="swatch" style="background: radial-gradient(circle, #9DB88A, #4E6B44)"></div>
+        <span>Moss</span>
+      </button>
+      <button class="tab-btn" data-mat="soil">
+        <div class="swatch" style="background: radial-gradient(circle, #B0885A, #4C2E14)"></div>
+        <span>Soil</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MATERIAL KEY -->
+  <div class="material-key">
+    <div class="material-key-inner">
+      <div class="section-label" style="margin-bottom:0.5rem">Material Concept</div>
+      <h3 style="color:var(--text-dark)">세 가지 자연 재질</h3>
+      <div class="key-grid">
+        <div class="key-card">
+          <div class="key-swatch stone"></div>
+          <div class="key-info">
+            <h4>Stone</h4>
+            <div class="key-ingredient">계란판 기본 / No additive</div>
+            <p>계란판 펄프 그대로의 색. 건조 후 자연스럽게 만들어지는 회갈빛 질감. 아무것도 더하지 않은 소재 본연의 표정입니다.</p>
+          </div>
+        </div>
+        <div class="key-card">
+          <div class="key-swatch moss"></div>
+          <div class="key-info">
+            <h4>Moss</h4>
+            <div class="key-ingredient">+ 녹차 분말 / Green Tea Powder</div>
+            <p>말린 녹차 분말을 펄프에 혼합. 자연 색소가 은은한 초록빛을 입히고 미세한 녹차 섬유가 질감을 더합니다.</p>
+          </div>
+        </div>
+        <div class="key-card">
+          <div class="key-swatch soil"></div>
+          <div class="key-info">
+            <h4>Soil</h4>
+            <div class="key-ingredient">+ 커피 가루 / Coffee Grounds</div>
+            <p>드립 후 남은 커피 찌꺼기를 펄프에 배합. 짙은 갈빛과 커피 특유의 거친 입자 질감이 흙을 닮은 표면을 만듭니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS GRID -->
+  <div class="products-section">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem">
+      <div>
+        <div class="section-label">All Products</div>
+        <h2 class="section-title" style="margin-bottom:0">제품 컬렉션</h2>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-light)">클릭하면 자세한 정보를 볼 수 있습니다</p>
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+
+      <!-- SEED POT — STONE -->
+      <div class="product-card" data-material="stone" data-product="seedpot-stone" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="60" cy="128" rx="45" ry="10" fill="rgba(0,0,0,0.15)"/>
+              <path d="M20 90 Q18 115 60 118 Q102 115 100 90 L90 40 Q80 30 60 30 Q40 30 30 40 Z" fill="rgba(255,255,255,0.22)"/>
+              <path d="M30 40 Q40 32 60 32 Q80 32 90 40 L100 90 Q80 86 60 86 Q40 86 20 90 Z" fill="rgba(255,255,255,0.12)"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot stone"></div> Stone</div>
+          <h3>씨앗 화분</h3>
+          <p>생분해 가능한 씨앗 심기용 소형 화분</p>
+        </div>
+      </div>
+
+      <!-- SEED POT — MOSS -->
+      <div class="product-card" data-material="moss" data-product="seedpot-moss" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="60" cy="128" rx="45" ry="10" fill="rgba(0,0,0,0.15)"/>
+              <path d="M20 90 Q18 115 60 118 Q102 115 100 90 L90 40 Q80 30 60 30 Q40 30 30 40 Z" fill="rgba(255,255,255,0.22)"/>
+              <path d="M30 40 Q40 32 60 32 Q80 32 90 40 L100 90 Q80 86 60 86 Q40 86 20 90 Z" fill="rgba(255,255,255,0.12)"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot moss"></div> Moss</div>
+          <h3>씨앗 화분</h3>
+          <p>녹차 분말을 더한 초록빛 씨앗 화분</p>
+        </div>
+      </div>
+
+      <!-- COASTER — SOIL -->
+      <div class="product-card" data-material="soil" data-product="coaster-soil" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="60" cy="72" rx="52" ry="7" fill="rgba(0,0,0,0.15)"/>
+              <ellipse cx="60" cy="46" rx="52" ry="30" fill="rgba(255,255,255,0.20)"/>
+              <ellipse cx="60" cy="42" rx="52" ry="28" fill="rgba(255,255,255,0.12)"/>
+              <ellipse cx="60" cy="40" rx="32" ry="16" fill="rgba(0,0,0,0.10)"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot soil"></div> Soil</div>
+          <h3>코스터</h3>
+          <p>커피 찌꺼기가 만든 짙은 흙빛 코스터</p>
+        </div>
+      </div>
+
+      <!-- PEN HOLDER — STONE -->
+      <div class="product-card" data-material="stone" data-product="penholder-stone" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="60" cy="150" rx="42" ry="8" fill="rgba(0,0,0,0.15)"/>
+              <rect x="22" y="40" width="76" height="100" rx="4" fill="rgba(255,255,255,0.20)"/>
+              <rect x="22" y="40" width="76" height="12" rx="4" fill="rgba(255,255,255,0.15)"/>
+              <rect x="38" y="10" width="8" height="55" rx="3" fill="rgba(255,255,255,0.35)"/>
+              <rect x="54" y="5" width="8" height="60" rx="3" fill="rgba(255,255,255,0.30)"/>
+              <rect x="70" y="12" width="8" height="52" rx="3" fill="rgba(255,255,255,0.28)"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot stone"></div> Stone</div>
+          <h3>펜 홀더</h3>
+          <p>자연 회색빛의 데스크 펜 홀더</p>
+        </div>
+      </div>
+
+      <!-- BOWL — MOSS -->
+      <div class="product-card" data-material="moss" data-product="bowl-moss" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="70" cy="92" rx="60" ry="7" fill="rgba(0,0,0,0.15)"/>
+              <path d="M15 55 Q12 85 70 88 Q128 85 125 55 Q100 25 70 22 Q40 25 15 55 Z" fill="rgba(255,255,255,0.20)"/>
+              <ellipse cx="70" cy="55" rx="55" ry="20" fill="rgba(0,0,0,0.08)"/>
+              <path d="M20 52 Q40 32 70 30 Q100 32 120 52" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot moss"></div> Moss</div>
+          <h3>소형 보울</h3>
+          <p>녹차빛 작은 수납 보울</p>
+        </div>
+      </div>
+
+      <!-- CANDLE HOLDER — SOIL -->
+      <div class="product-card" data-material="soil" data-product="candle-soil" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="50" cy="152" rx="38" ry="7" fill="rgba(0,0,0,0.15)"/>
+              <path d="M18 120 Q16 145 50 148 Q84 145 82 120 L78 65 Q68 58 50 58 Q32 58 22 65 Z" fill="rgba(255,255,255,0.20)"/>
+              <ellipse cx="50" cy="65" rx="28" ry="9" fill="rgba(0,0,0,0.10)"/>
+              <!-- flame -->
+              <ellipse cx="50" cy="38" rx="5" ry="8" fill="rgba(255,220,100,0.7)"/>
+              <ellipse cx="50" cy="42" rx="3" ry="5" fill="rgba(255,160,40,0.8)"/>
+              <line x1="50" y1="58" x2="50" y2="47" stroke="rgba(200,180,100,0.8)" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot soil"></div> Soil</div>
+          <h3>캔들 홀더</h3>
+          <p>커피가루 질감의 원통형 캔들 홀더</p>
+        </div>
+      </div>
+
+      <!-- COASTER — STONE -->
+      <div class="product-card" data-material="stone" data-product="coaster-stone" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="60" cy="72" rx="52" ry="7" fill="rgba(0,0,0,0.15)"/>
+              <ellipse cx="60" cy="46" rx="52" ry="30" fill="rgba(255,255,255,0.20)"/>
+              <ellipse cx="60" cy="42" rx="52" ry="28" fill="rgba(255,255,255,0.12)"/>
+              <ellipse cx="60" cy="40" rx="32" ry="16" fill="rgba(0,0,0,0.10)"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot stone"></div> Stone</div>
+          <h3>코스터</h3>
+          <p>계란판 본연의 중성적인 회색 코스터</p>
+        </div>
+      </div>
+
+      <!-- BOWL — SOIL -->
+      <div class="product-card" data-material="soil" data-product="bowl-soil" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="70" cy="92" rx="60" ry="7" fill="rgba(0,0,0,0.15)"/>
+              <path d="M15 55 Q12 85 70 88 Q128 85 125 55 Q100 25 70 22 Q40 25 15 55 Z" fill="rgba(255,255,255,0.20)"/>
+              <ellipse cx="70" cy="55" rx="55" ry="20" fill="rgba(0,0,0,0.08)"/>
+              <path d="M20 52 Q40 32 70 30 Q100 32 120 52" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot soil"></div> Soil</div>
+          <h3>소형 보울</h3>
+          <p>커피 찌꺼기로 깊어진 흙빛 보울</p>
+        </div>
+      </div>
+
+      <!-- PEN HOLDER — MOSS -->
+      <div class="product-card" data-material="moss" data-product="penholder-moss" onclick="openModal(this)">
+        <div class="product-visual">
+          <div class="product-shape">
+            <svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="60" cy="150" rx="42" ry="8" fill="rgba(0,0,0,0.15)"/>
+              <rect x="22" y="40" width="76" height="100" rx="4" fill="rgba(255,255,255,0.20)"/>
+              <rect x="22" y="40" width="76" height="12" rx="4" fill="rgba(255,255,255,0.15)"/>
+              <rect x="38" y="10" width="8" height="55" rx="3" fill="rgba(255,255,255,0.35)"/>
+              <rect x="54" y="5" width="8" height="60" rx="3" fill="rgba(255,255,255,0.30)"/>
+              <rect x="70" y="12" width="8" height="52" rx="3" fill="rgba(255,255,255,0.28)"/>
+            </svg>
+          </div>
+          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+        </div>
+        <div class="product-info">
+          <div class="product-material-tag"><div class="dot moss"></div> Moss</div>
+          <h3>펜 홀더</h3>
+          <p>녹차 분말로 물든 초록빛 펜 홀더</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+    <div class="modal-card" id="modalCard">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <div class="modal-visual" id="modalVisual">
+        <div class="modal-visual-inner">
+          <div class="modal-product-shape" id="modalShape"></div>
+        </div>
+      </div>
+
+      <div class="modal-body" id="modalBody">
+        <!-- filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <div class="footer-logo">RePULP</div>
+      <p>계란판과 밀가루풀로<br>자연 소재를 빚는 브랜드</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="brand.html">Brand Story</a></li>
+        <li><a href="products.html">Products</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Materials</h4>
+      <ul>
+        <li><a href="#">Stone — 기본 펄프</a></li>
+        <li><a href="#">Moss — + 녹차 분말</a></li>
+        <li><a href="#">Soil — + 커피 가루</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2026 RePULP. All rights reserved.</p>
+    <p>Made from egg cartons & flour paste — back to earth.</p>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    /* =====================
+       Product Data
+       ===================== */
+    const PRODUCTS = {
+      'seedpot-stone': {
+        name: '씨앗 화분',
+        sub: 'Seed Pot · Stone',
+        material: 'stone',
+        materialLabel: 'Stone — 기본 계란판 펄프',
+        swatchStyle: 'background: radial-gradient(circle, #D6CBBC, #9A8E7E)',
+        description: '씨앗을 직접 심어 키울 수 있는 소형 화분입니다. 화분이 흙 속에서 분해되면서 씨앗에 영양을 공급합니다. 계란판 펄프 본연의 회갈색이 화분대 위에서 자연스러운 존재감을 만듭니다.',
+        process: [
+          { title: '계란판 수거 & 세척', desc: '지역 수거 파트너에서 받은 계란판을 물에 세척합니다.' },
+          { title: '불리기 & 해리', desc: '물에 1시간 이상 담가 충분히 불린 뒤 손으로 섬유질을 분리합니다.' },
+          { title: '밀가루풀 혼합', desc: '해리된 펄프에 밀가루풀(밀가루 1 : 물 3 비율)을 배합해 성형 가능한 반죽을 만듭니다.' },
+          { title: '틀 성형', desc: '화분 틀에 반죽을 눌러 넣고 균일한 두께로 고르게 정리합니다.' },
+          { title: '자연 건조', desc: '48시간 상온 건조. 오븐이나 히터를 사용하지 않습니다.' },
+          { title: '천연 오일 마감', desc: '들기름 소량으로 발수성 향상. 화학 코팅 없음.' },
+        ],
+        badges: ['100% 천연 재료', '완전 생분해', '무독성 공정', '지역 수거 소재'],
+        shape: `<svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="128" rx="45" ry="10" fill="rgba(0,0,0,0.2)"/><path d="M20 90 Q18 115 60 118 Q102 115 100 90 L90 40 Q80 30 60 30 Q40 30 30 40 Z" fill="rgba(150,130,110,0.9)"/><path d="M30 40 Q40 32 60 32 Q80 32 90 40 L100 90 Q80 86 60 86 Q40 86 20 90 Z" fill="rgba(170,150,130,0.7)"/></svg>`
+      },
+      'seedpot-moss': {
+        name: '씨앗 화분',
+        sub: 'Seed Pot · Moss',
+        material: 'moss',
+        materialLabel: 'Moss — 계란판 펄프 + 녹차 분말',
+        swatchStyle: 'background: radial-gradient(circle, #9DB88A, #4E6B44)',
+        description: '녹차 분말을 혼합한 Moss 소재 씨앗 화분입니다. 녹차의 자연 색소가 은은한 초록빛을 만들고, 녹차 섬유가 질감에 깊이를 더합니다. 허브나 작은 식물을 심어 창가에 두면 식물과 화분이 하나의 자연이 됩니다.',
+        process: [
+          { title: '계란판 수거 & 세척', desc: '지역 수거 파트너에서 받은 계란판을 물에 세척합니다.' },
+          { title: '불리기 & 해리', desc: '물에 담가 섬유질을 분리합니다.' },
+          { title: '녹차 분말 혼합', desc: '말린 녹차 분말을 펄프에 배합합니다. 녹차 비율로 색의 진하기를 조절합니다.' },
+          { title: '밀가루풀 바인딩', desc: '천연 밀가루풀로 결합해 성형 가능한 반죽으로 만듭니다.' },
+          { title: '틀 성형 & 건조', desc: '화분 틀 성형 후 48시간 자연 건조합니다.' },
+          { title: '천연 오일 마감', desc: '들기름으로 표면 마감. 녹차 향이 은은하게 남습니다.' },
+        ],
+        badges: ['100% 천연 재료', '녹차 자연 색소', '완전 생분해', '무독성 공정'],
+        shape: `<svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="128" rx="45" ry="10" fill="rgba(0,0,0,0.2)"/><path d="M20 90 Q18 115 60 118 Q102 115 100 90 L90 40 Q80 30 60 30 Q40 30 30 40 Z" fill="rgba(90,130,80,0.9)"/><path d="M30 40 Q40 32 60 32 Q80 32 90 40 L100 90 Q80 86 60 86 Q40 86 20 90 Z" fill="rgba(120,160,100,0.7)"/></svg>`
+      },
+      'coaster-soil': {
+        name: '코스터',
+        sub: 'Coaster · Soil',
+        material: 'soil',
+        materialLabel: 'Soil — 계란판 펄프 + 커피 가루',
+        swatchStyle: 'background: radial-gradient(circle, #B0885A, #4C2E14)',
+        description: '드립 커피 후 남은 커피 찌꺼기를 펄프에 섞어 만든 코스터입니다. 커피 고유의 짙은 갈색과 거친 입자 질감이 흙을 닮은 표면을 만들어냅니다. 커피잔을 올려두면 소재와 음료가 어우러지는 미감이 생깁니다.',
+        process: [
+          { title: '커피 찌꺼기 수거', desc: '카페 파트너에서 드립 후 남은 커피 찌꺼기를 수거합니다. 이중 재활용 구조입니다.' },
+          { title: '계란판 해리', desc: '계란판을 물에 풀어 펄프 섬유를 분리합니다.' },
+          { title: '커피 찌꺼기 혼합', desc: '건조된 커피 가루를 펄프에 10~20% 비율로 배합합니다.' },
+          { title: '밀가루풀 바인딩', desc: '천연 밀가루풀을 추가해 일체감 있는 반죽으로 만듭니다.' },
+          { title: '압착 성형', desc: '코스터 틀에 넣고 균일하게 압착해 평평한 표면을 만듭니다.' },
+          { title: '건조 & 오일 마감', desc: '48시간 자연 건조 후 들기름 마감. 발수성이 더해집니다.' },
+        ],
+        badges: ['이중 업사이클', '커피 찌꺼기 재활용', '완전 생분해', '지역 카페 협력'],
+        shape: `<svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="72" rx="52" ry="7" fill="rgba(0,0,0,0.2)"/><ellipse cx="60" cy="46" rx="52" ry="30" fill="rgba(100,65,30,0.9)"/><ellipse cx="60" cy="42" rx="52" ry="28" fill="rgba(130,90,50,0.6)"/><ellipse cx="60" cy="40" rx="32" ry="16" fill="rgba(0,0,0,0.12)"/></svg>`
+      },
+      'penholder-stone': {
+        name: '펜 홀더',
+        sub: 'Pen Holder · Stone',
+        material: 'stone',
+        materialLabel: 'Stone — 기본 계란판 펄프',
+        swatchStyle: 'background: radial-gradient(circle, #D6CBBC, #9A8E7E)',
+        description: '아무것도 더하지 않은 계란판 펄프 그대로의 색과 질감. 종이 섬유의 거친 표면이 그대로 살아있는 데스크 오거나이저입니다. 자연스러운 회갈색이 어떤 인테리어에도 잘 어울립니다.',
+        process: [
+          { title: '계란판 수거', desc: '지역 수거 파트너에서 계란판을 수거합니다.' },
+          { title: '해리 & 반죽', desc: '충분히 불린 뒤 밀가루풀과 혼합합니다.' },
+          { title: '원통 성형', desc: '원통 틀 안쪽에 반죽을 고르게 눌러 형태를 잡습니다.' },
+          { title: '72시간 건조', desc: '두꺼운 벽 두께를 위해 충분한 건조 시간을 확보합니다.' },
+          { title: '사포 마감', desc: '자연 사포로 표면을 고르게 정리합니다.' },
+          { title: '오일 마감', desc: '들기름으로 발수성 마감. 이것이 유일한 마감재입니다.' },
+        ],
+        badges: ['100% 천연 재료', '오래 쓸수록 멋스러움', '완전 생분해', '무독성'],
+        shape: `<svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="150" rx="42" ry="8" fill="rgba(0,0,0,0.2)"/><rect x="22" y="40" width="76" height="100" rx="4" fill="rgba(150,130,110,0.85)"/><rect x="22" y="40" width="76" height="14" rx="4" fill="rgba(170,150,130,0.6)"/><rect x="38" y="10" width="8" height="55" rx="3" fill="rgba(200,190,180,0.8)"/><rect x="54" y="5" width="8" height="60" rx="3" fill="rgba(200,190,180,0.75)"/><rect x="70" y="12" width="8" height="52" rx="3" fill="rgba(200,190,180,0.7)"/></svg>`
+      },
+      'bowl-moss': {
+        name: '소형 보울',
+        sub: 'Small Bowl · Moss',
+        material: 'moss',
+        materialLabel: 'Moss — 계란판 펄프 + 녹차 분말',
+        swatchStyle: 'background: radial-gradient(circle, #9DB88A, #4E6B44)',
+        description: '녹차빛이 스민 얕고 넓은 소형 보울. 소품을 담거나 작은 화분의 받침으로, 또는 그 자체로 장식물로 씁니다. 녹차 분말이 표면에 만드는 미세한 질감 변화가 보울마다 각기 다른 표정을 만듭니다.',
+        process: [
+          { title: '계란판 해리', desc: '계란판을 물에 불려 펄프 섬유를 분리합니다.' },
+          { title: '녹차 분말 배합', desc: '말린 녹차 분말을 배합합니다. 비율에 따라 색 농도가 달라집니다.' },
+          { title: '밀가루풀 혼합', desc: '천연 결합제로 반죽의 점도를 조절합니다.' },
+          { title: '손 성형', desc: '틀 없이 손으로 보울 형태를 빚습니다. 보울마다 유니크한 형태가 생깁니다.' },
+          { title: '자연 건조', desc: '실온에서 2~3일 건조합니다.' },
+          { title: '오일 마감', desc: '들기름으로 표면을 마무리합니다.' },
+        ],
+        badges: ['핸드메이드', '녹차 자연 색소', '각 제품 유니크', '완전 생분해'],
+        shape: `<svg viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="92" rx="60" ry="7" fill="rgba(0,0,0,0.2)"/><path d="M15 55 Q12 85 70 88 Q128 85 125 55 Q100 25 70 22 Q40 25 15 55 Z" fill="rgba(80,120,65,0.85)"/><ellipse cx="70" cy="55" rx="55" ry="20" fill="rgba(0,0,0,0.1)"/><path d="M20 52 Q40 32 70 30 Q100 32 120 52" stroke="rgba(160,200,140,0.4)" stroke-width="2" fill="none"/></svg>`
+      },
+      'candle-soil': {
+        name: '캔들 홀더',
+        sub: 'Candle Holder · Soil',
+        material: 'soil',
+        materialLabel: 'Soil — 계란판 펄프 + 커피 가루',
+        swatchStyle: 'background: radial-gradient(circle, #B0885A, #4C2E14)',
+        description: '커피 찌꺼기가 만드는 짙고 거친 흙빛 표면. 안에 캔들을 넣으면 빛이 소재를 통과하며 따뜻한 황갈색 빛을 퍼뜨립니다. 커피 가루 특유의 미세한 구멍들이 빛을 산란시켜 독특한 조명 효과를 냅니다.',
+        process: [
+          { title: '커피 찌꺼기 수거 & 건조', desc: '카페에서 수거한 커피 찌꺼기를 햇볕에 건조시킵니다.' },
+          { title: '계란판 펄프 해리', desc: '계란판을 물에 풀어 섬유를 분리합니다.' },
+          { title: '커피 가루 혼합', desc: '건조된 커피 가루를 15~25% 비율로 펄프에 섞습니다.' },
+          { title: '밀가루풀 바인딩', desc: '천연 결합제로 반죽의 강도를 높입니다.' },
+          { title: '원통 성형', desc: '원통 틀 안쪽에 반죽을 붙여 얇은 벽을 만듭니다. 빛이 투과되도록 벽 두께를 조절합니다.' },
+          { title: '건조 & 마감', desc: '72시간 자연 건조. 들기름으로 발수 마감.' },
+        ],
+        badges: ['이중 업사이클', '투광 조명 효과', '카페 협력 소재', '완전 생분해'],
+        shape: `<svg viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="152" rx="38" ry="7" fill="rgba(0,0,0,0.2)"/><path d="M18 120 Q16 145 50 148 Q84 145 82 120 L78 65 Q68 58 50 58 Q32 58 22 65 Z" fill="rgba(90,55,25,0.85)"/><ellipse cx="50" cy="65" rx="28" ry="9" fill="rgba(0,0,0,0.12)"/><ellipse cx="50" cy="38" rx="5" ry="8" fill="rgba(255,220,100,0.8)"/><ellipse cx="50" cy="42" rx="3" ry="5" fill="rgba(255,160,40,0.9)"/><line x1="50" y1="58" x2="50" y2="47" stroke="rgba(200,180,100,0.9)" stroke-width="1.5"/></svg>`
+      },
+      'coaster-stone': {
+        name: '코스터',
+        sub: 'Coaster · Stone',
+        material: 'stone',
+        materialLabel: 'Stone — 기본 계란판 펄프',
+        swatchStyle: 'background: radial-gradient(circle, #D6CBBC, #9A8E7E)',
+        description: '계란판 펄프 그대로. 가장 중성적이고 차분한 표정의 코스터입니다. 종이 섬유의 결이 그대로 살아있고 표면에서 계란판이 지닌 독특한 보풀 질감을 볼 수 있습니다. 어떤 색의 컵에도 잘 어울립니다.',
+        process: [
+          { title: '계란판 수거', desc: '지역 파트너에서 계란판 수거.' },
+          { title: '세척 & 해리', desc: '물에 불려 섬유질 분리.' },
+          { title: '밀가루풀 혼합', desc: '천연 결합제 배합.' },
+          { title: '압착 성형', desc: '코스터 틀에 균일하게 압착.' },
+          { title: '자연 건조', desc: '48시간 상온 건조.' },
+          { title: '오일 마감', desc: '들기름으로 발수성 마감.' },
+        ],
+        badges: ['100% 천연 재료', '펄프 본연의 질감', '완전 생분해', '무독성'],
+        shape: `<svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="72" rx="52" ry="7" fill="rgba(0,0,0,0.2)"/><ellipse cx="60" cy="46" rx="52" ry="30" fill="rgba(160,145,125,0.9)"/><ellipse cx="60" cy="42" rx="52" ry="28" fill="rgba(185,170,150,0.6)"/><ellipse cx="60" cy="40" rx="32" ry="16" fill="rgba(0,0,0,0.1)"/></svg>`
+      },
+      'bowl-soil': {
+        name: '소형 보울',
+        sub: 'Small Bowl · Soil',
+        material: 'soil',
+        materialLabel: 'Soil — 계란판 펄프 + 커피 가루',
+        swatchStyle: 'background: radial-gradient(circle, #B0885A, #4C2E14)',
+        description: '커피 찌꺼기로 깊고 풍부한 갈색을 입힌 소형 보울. 커피 가루의 거친 입자가 표면 곳곳에 보이며 촉각적으로도 재미있는 질감을 만듭니다. 커피 원두 같은 진한 향이 처음 며칠간 은은하게 납니다.',
+        process: [
+          { title: '커피 찌꺼기 수거 & 건조', desc: '카페 파트너에서 수거 후 건조합니다.' },
+          { title: '계란판 해리', desc: '계란판을 물에 풀어 펄프로 만듭니다.' },
+          { title: '커피 가루 혼합', desc: '20% 비율의 커피 가루를 펄프에 섞습니다.' },
+          { title: '밀가루풀 바인딩', desc: '천연 결합제로 반죽합니다.' },
+          { title: '손 성형', desc: '손으로 직접 보울 형태를 빚습니다. 각각 유니크한 형태입니다.' },
+          { title: '건조 & 오일 마감', desc: '자연 건조 후 들기름으로 마무리.' },
+        ],
+        badges: ['이중 업사이클', '커피 향 잔향', '핸드메이드', '완전 생분해'],
+        shape: `<svg viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="92" rx="60" ry="7" fill="rgba(0,0,0,0.2)"/><path d="M15 55 Q12 85 70 88 Q128 85 125 55 Q100 25 70 22 Q40 25 15 55 Z" fill="rgba(100,65,35,0.88)"/><ellipse cx="70" cy="55" rx="55" ry="20" fill="rgba(0,0,0,0.1)"/><path d="M20 52 Q40 32 70 30 Q100 32 120 52" stroke="rgba(180,130,80,0.4)" stroke-width="2" fill="none"/></svg>`
+      },
+      'penholder-moss': {
+        name: '펜 홀더',
+        sub: 'Pen Holder · Moss',
+        material: 'moss',
+        materialLabel: 'Moss — 계란판 펄프 + 녹차 분말',
+        swatchStyle: 'background: radial-gradient(circle, #9DB88A, #4E6B44)',
+        description: '녹차 분말이 섞인 은은한 초록빛 펜 홀더. 책상 위에 두면 식물 한 그루를 둔 것 같은 자연스러운 청량감이 납니다. 녹차 섬유의 가느다란 결이 표면에 무늬를 만들어 보울마다 다른 패턴이 생깁니다.',
+        process: [
+          { title: '계란판 수거 & 해리', desc: '지역 파트너에서 수거 후 펄프로 분리합니다.' },
+          { title: '녹차 분말 배합', desc: '말린 녹차 분말을 10~15% 비율로 혼합합니다.' },
+          { title: '밀가루풀 바인딩', desc: '천연 결합제를 배합합니다.' },
+          { title: '원통 틀 성형', desc: '원통 안쪽에 반죽을 균일하게 눌러 담습니다.' },
+          { title: '72시간 건조', desc: '충분한 강도를 위해 긴 건조 시간을 확보합니다.' },
+          { title: '자연 마감', desc: '들기름으로 발수 마감. 녹차 특유의 미세한 향이 남습니다.' },
+        ],
+        badges: ['녹차 자연 색소', '핸드메이드 패턴', '완전 생분해', '무독성'],
+        shape: `<svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="150" rx="42" ry="8" fill="rgba(0,0,0,0.2)"/><rect x="22" y="40" width="76" height="100" rx="4" fill="rgba(75,115,60,0.85)"/><rect x="22" y="40" width="76" height="14" rx="4" fill="rgba(110,155,90,0.6)"/><rect x="38" y="10" width="8" height="55" rx="3" fill="rgba(180,210,160,0.8)"/><rect x="54" y="5" width="8" height="60" rx="3" fill="rgba(180,210,160,0.75)"/><rect x="70" y="12" width="8" height="52" rx="3" fill="rgba(180,210,160,0.7)"/></svg>`
+      },
+    };
+
+    /* material bg helpers */
+    const MATERIAL_BG = {
+      stone: 'radial-gradient(ellipse 70% 70% at 30% 30%, #D6CBBC 0%, #B4A490 40%, #9A8E7E 80%, #887870 100%)',
+      moss:  'radial-gradient(ellipse 70% 70% at 30% 30%, #B0C99E 0%, #7EA06A 40%, #5A7A4A 80%, #3E5C35 100%)',
+      soil:  'radial-gradient(ellipse 70% 70% at 30% 30%, #B0885A 0%, #8A6240 40%, #6A4528 80%, #4C2E14 100%)',
+    };
+
+    function openModal(card) {
+      const key = card.dataset.product;
+      const data = PRODUCTS[key];
+      if (!data) return;
+
+      const overlay = document.getElementById('modalOverlay');
+      const visual  = document.getElementById('modalVisual');
+      const shape   = document.getElementById('modalShape');
+      const body    = document.getElementById('modalBody');
+
+      visual.style.background = MATERIAL_BG[data.material];
+      shape.innerHTML = data.shape;
+
+      const stepsHTML = data.process.map((s, i) => `
+        <li class="process-step">
+          <div class="process-num">${i+1}</div>
+          <div class="process-text">
+            <h5>${s.title}</h5>
+            <p>${s.desc}</p>
+          </div>
+        </li>
+      `).join('');
+
+      const badgesHTML = data.badges.map(b =>
+        `<span class="modal-badge">${b}</span>`
+      ).join('');
+
+      body.innerHTML = `
+        <div class="modal-material-tag">
+          <div class="swatch" style="${data.swatchStyle}"></div>
+          ${data.materialLabel}
+        </div>
+        <h2>${data.name}</h2>
+        <div class="modal-sub">${data.sub}</div>
+        <div class="modal-divider"></div>
+        <p>${data.description}</p>
+        <div class="modal-section-title">제작 과정</div>
+        <ul class="process-steps">${stepsHTML}</ul>
+        <div class="modal-section-title">지속가능성</div>
+        <div class="modal-badges">${badgesHTML}</div>
+      `;
+
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOutside(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+
+    /* Tab Filter */
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mat = btn.dataset.mat;
+        document.querySelectorAll('.product-card').forEach(card => {
+          if (mat === 'all' || card.dataset.material === mat) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+        // update grid gap background
+        const grid = document.getElementById('productsGrid');
+        grid.style.background = mat === 'all' ? 'rgba(107,91,78,0.08)' : 'transparent';
+      });
+    });
+
+    /* ESC to close */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
