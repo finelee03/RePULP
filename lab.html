@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RePULP — The Lab</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ========================
+       Page Hero
+       ======================== */
+    .page-hero {
+      height: 52vh;
+      min-height: 360px;
+      background: var(--stone-dark);
+      display: flex;
+      align-items: flex-end;
+      padding: 0 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-texture {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 60% at 75% 25%, rgba(90,112,82,0.2) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 50% at 20% 75%, rgba(107,91,78,0.2) 0%, transparent 65%);
+    }
+
+    .hero-texture::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      background-image:
+        repeating-linear-gradient(45deg,  rgba(255,255,255,0.4) 0px, rgba(255,255,255,0.4) 1px, transparent 1px, transparent 6px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,0.2) 0px, rgba(255,255,255,0.2) 1px, transparent 1px, transparent 9px);
+    }
+
+    .page-hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .page-hero .section-label { color: var(--moss-light); }
+    .page-hero h1 { color: var(--white); max-width: 600px; }
+    .page-hero h1 em { color: var(--soil-light); font-style: italic; }
+    .page-hero .hero-sub {
+      color: rgba(246,241,232,0.65);
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      max-width: 460px;
+    }
+
+    /* ========================
+       Material Section Nav
+       ======================== */
+    .lab-nav {
+      background: var(--white);
+      border-bottom: 1px solid rgba(107,91,78,0.1);
+      position: sticky;
+      top: 64px;
+      z-index: 50;
+    }
+
+    .lab-nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+
+    .lab-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 1.1rem 2rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      font-family: 'Pretendard', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      white-space: nowrap;
+      text-decoration: none;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .lab-nav-btn .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .lab-nav-btn:hover,
+    .lab-nav-btn.active { color: var(--text-dark); }
+
+    .lab-nav-btn[href="#stone"].active { border-bottom-color: var(--stone-mid); }
+    .lab-nav-btn[href="#moss"].active  { border-bottom-color: var(--moss-mid); }
+    .lab-nav-btn[href="#soil"].active  { border-bottom-color: var(--soil-mid); }
+
+    /* ========================
+       Section Header
+       ======================== */
+    .lab-section {
+      padding: 6rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .lab-section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .lab-section-swatch {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .swatch-stone { background: radial-gradient(circle at 35% 35%, #D6CBBC, #9A8E7E, #6B5E50); }
+    .swatch-moss  { background: radial-gradient(circle at 35% 35%, #B0C99E, #7EA06A, #3E5C35); }
+    .swatch-soil  { background: radial-gradient(circle at 35% 35%, #C8A878, #A07850, #4C2E14); }
+
+    .lab-section-title {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .lab-section-title h2 { margin: 0; font-size: clamp(1.8rem, 3vw, 2.6rem); }
+
+    .lab-separator {
+      width: 100%;
+      height: 1px;
+      background: rgba(107,91,78,0.1);
+      margin-bottom: 3rem;
+    }
+
+    /* ========================
+       Photo Grid
+       ======================== */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      background: rgba(107,91,78,0.08);
+    }
+
+    .photo-grid.wide {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+
+    .photo-slot {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      background: var(--cream-deep);
+      cursor: default;
+    }
+
+    .photo-slot.tall { aspect-ratio: 3/4; }
+    .photo-slot.wide { aspect-ratio: 4/3; }
+
+    .photo-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-slot:hover img { transform: scale(1.04); }
+
+    /* Placeholder when no image */
+    .photo-slot .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+    }
+
+    .placeholder-icon {
+      width: 48px; height: 48px;
+      border: 1.5px dashed rgba(107,91,78,0.25);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      opacity: 0.4;
+    }
+
+    .placeholder-text {
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      opacity: 0.5;
+    }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 2rem 1.4rem 1.2rem;
+      background: linear-gradient(to top, rgba(20,18,14,0.65), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .photo-slot:hover .photo-caption { opacity: 1; }
+
+    .photo-caption p {
+      font-size: 0.78rem;
+      color: rgba(246,241,232,0.85);
+      margin: 0;
+    }
+
+    /* ========================
+       Video Section
+       ======================== */
+    .video-section {
+      background: var(--cream-deep);
+      border-top: 1px solid rgba(107,91,78,0.08);
+      border-bottom: 1px solid rgba(107,91,78,0.08);
+      padding: 6rem 4rem;
+    }
+
+    .video-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      background: rgba(107,91,78,0.08);
+      margin-top: 3rem;
+    }
+
+    .video-slot {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--stone-dark);
+      overflow: hidden;
+    }
+
+    .video-slot video,
+    .video-slot iframe {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: none;
+    }
+
+    .video-slot .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: linear-gradient(135deg, var(--stone-dark) 0%, #3a2e24 100%);
+    }
+
+    .video-play-icon {
+      width: 64px; height: 64px;
+      border: 2px solid rgba(246,241,232,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      opacity: 0.5;
+    }
+
+    .video-placeholder .placeholder-text {
+      color: rgba(246,241,232,0.35);
+      opacity: 1;
+    }
+
+    .video-label {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 1.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(246,241,232,0.5);
+    }
+
+    /* ========================
+       Upload Guide
+       ======================== */
+    .upload-guide {
+      background: var(--green-dark);
+      padding: 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .upload-guide-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .upload-guide h3 { color: var(--white); margin-bottom: 0.6rem; }
+    .upload-guide p  { color: var(--moss-light); font-size: 0.9rem; line-height: 1.7; }
+
+    .upload-steps { list-style: none; }
+
+    .upload-step {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(181,206,172,0.12);
+      color: var(--moss-light);
+      font-size: 0.88rem;
+    }
+
+    .upload-step:last-child { border-bottom: none; }
+
+    .upload-num {
+      flex-shrink: 0;
+      width: 24px; height: 24px;
+      border: 1px solid var(--moss-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: var(--moss-light);
+    }
+
+    code {
+      font-family: monospace;
+      background: rgba(181,206,172,0.12);
+      padding: 0.15em 0.5em;
+      border-radius: 2px;
+      font-size: 0.85em;
+      color: var(--soil-light);
+    }
+
+    /* ========================
+       Responsive
+       ======================== */
+    @media (max-width: 900px) {
+      .photo-grid,
+      .photo-grid.wide { grid-template-columns: repeat(2, 1fr); }
+      .video-grid      { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 0 1.6rem 3.5rem; }
+      .lab-nav-inner { padding: 0 1rem; }
+      .lab-section { padding: 4rem 1.6rem; }
+      .lab-section-header { flex-direction: column; align-items: flex-start; }
+      .video-section { padding: 4rem 1.6rem; }
+      .upload-guide { padding: 3rem 1.6rem; }
+      .upload-guide-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .photo-grid,
+      .photo-grid.wide { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="RePULP" class="nav-logo-img"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="brand.html">Brand</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="lab.html" class="active">Lab</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="hero-texture"></div>
+    <div class="page-hero-inner">
+      <div class="section-label">Process Documentation</div>
+      <h1>The <em>Lab</em></h1>
+      <p class="hero-sub">Behind-the-scenes photos and videos from our making process — Stone, Moss, and Soil.</p>
+    </div>
+  </section>
+
+  <!-- LAB NAV -->
+  <div class="lab-nav">
+    <div class="lab-nav-inner">
+      <a href="#stone" class="lab-nav-btn active">
+        <div class="dot" style="background: var(--stone-mid)"></div>
+        Stone
+      </a>
+      <a href="#moss" class="lab-nav-btn">
+        <div class="dot" style="background: var(--moss-mid)"></div>
+        Moss
+      </a>
+      <a href="#soil" class="lab-nav-btn">
+        <div class="dot" style="background: var(--soil-mid)"></div>
+        Soil
+      </a>
+      <a href="#video" class="lab-nav-btn">
+        <div class="dot" style="background: var(--text-light)"></div>
+        Video
+      </a>
+    </div>
+  </div>
+
+  <!-- ===========================
+       STONE SECTION
+       =========================== -->
+  <section id="stone" class="lab-section">
+    <div class="lab-section-header fade-up">
+      <div class="lab-section-title">
+        <div class="lab-section-swatch swatch-stone"></div>
+        <div>
+          <div class="section-label" style="margin-bottom:0.3rem">No Additive</div>
+          <h2>Stone</h2>
+        </div>
+      </div>
+      <p style="max-width:380px; font-size:0.9rem">
+        Egg carton pulp in its purest form. The warm gray-beige is the natural color of dried paper fibre — nothing added, nothing removed.
+      </p>
+    </div>
+    <div class="lab-separator"></div>
+
+    <div class="photo-grid fade-up">
+      <!-- Replace src with your image paths, e.g. src="assets/stone-01.jpg" -->
+      <div class="photo-slot">
+        <img src="" alt="Stone material — raw pulp" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Raw egg carton pulp before mixing</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Stone — mixing process" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Mixing pulp with flour paste binder</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Stone — moulding" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Pressing dough into mould</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Stone — drying" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Air drying — 48 hours, no heat</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Stone — surface texture" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Surface texture after drying</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Stone — finished product" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Finished Stone piece after oil finish</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       MOSS SECTION
+       =========================== -->
+  <section id="moss" class="lab-section" style="background: var(--cream-deep)">
+    <div class="lab-section-header fade-up">
+      <div class="lab-section-title">
+        <div class="lab-section-swatch swatch-moss"></div>
+        <div>
+          <div class="section-label" style="margin-bottom:0.3rem">+ Green Tea Powder</div>
+          <h2>Moss</h2>
+        </div>
+      </div>
+      <p style="max-width:380px; font-size:0.9rem">
+        Dried green tea powder is blended into the pulp. Natural pigments tint the fibre green, while fine tea strands add texture variation in every piece.
+      </p>
+    </div>
+    <div class="lab-separator"></div>
+
+    <div class="photo-grid wide fade-up">
+      <div class="photo-slot tall">
+        <img src="" alt="Moss — green tea powder" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Dried green tea powder ready to blend</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Moss — blending" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Blending tea into pulp</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Moss — colour variation" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Colour intensity by ratio</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Moss — hand forming" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Hand-forming without a mould</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Moss — surface detail" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Tea fibre texture on surface</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Moss — finished" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Finished Moss pieces</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SOIL SECTION
+       =========================== -->
+  <section id="soil" class="lab-section">
+    <div class="lab-section-header fade-up">
+      <div class="lab-section-title">
+        <div class="lab-section-swatch swatch-soil"></div>
+        <div>
+          <div class="section-label" style="margin-bottom:0.3rem">+ Coffee Grounds</div>
+          <h2>Soil</h2>
+        </div>
+      </div>
+      <p style="max-width:380px; font-size:0.9rem">
+        Dried coffee grounds from local café partners are mixed into the pulp. Deep brown colour, coarse grain texture, and a faint coffee scent in the first few days.
+      </p>
+    </div>
+    <div class="lab-separator"></div>
+
+    <div class="photo-grid fade-up">
+      <div class="photo-slot">
+        <img src="" alt="Soil — coffee grounds" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Dried coffee grounds from café partners</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Soil — mixing" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Mixing grounds into pulp (15–25%)</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Soil — pressing" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Pressing and forming the dough</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Soil — candle holder process" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Thin-wall candle holder — light-transmitting</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Soil — drying" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>72-hour air dry</p></div>
+      </div>
+      <div class="photo-slot">
+        <img src="" alt="Soil — finished" onerror="this.style.display='none'">
+        <div class="placeholder">
+          <div class="placeholder-icon">📷</div>
+          <span class="placeholder-text">Add photo</span>
+        </div>
+        <div class="photo-caption"><p>Finished Soil pieces — all naturally dark</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       VIDEO SECTION
+       =========================== -->
+  <section id="video" class="video-section">
+    <div class="video-inner">
+      <div class="section-label">Video Documentation</div>
+      <h2 class="section-title">Process in Motion</h2>
+      <div class="divider"></div>
+
+      <div class="video-grid fade-up">
+        <!-- Drop your video file path into src, or use an iframe for YouTube/Vimeo -->
+        <div class="video-slot">
+          <!-- OPTION A: local file → <video src="assets/video-pulp-making.mp4" controls playsinline></video> -->
+          <!-- OPTION B: YouTube → <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+          <div class="video-placeholder">
+            <div class="video-play-icon">▶</div>
+            <span class="placeholder-text">Add video</span>
+          </div>
+          <div class="video-label">Pulp Making Process</div>
+        </div>
+
+        <div class="video-slot">
+          <div class="video-placeholder">
+            <div class="video-play-icon">▶</div>
+            <span class="placeholder-text">Add video</span>
+          </div>
+          <div class="video-label">Hand Forming — Moss Bowl</div>
+        </div>
+
+        <div class="video-slot">
+          <div class="video-placeholder">
+            <div class="video-play-icon">▶</div>
+            <span class="placeholder-text">Add video</span>
+          </div>
+          <div class="video-label">Coffee Grounds Mixing — Soil</div>
+        </div>
+
+        <div class="video-slot">
+          <div class="video-placeholder">
+            <div class="video-play-icon">▶</div>
+            <span class="placeholder-text">Add video</span>
+          </div>
+          <div class="video-label">Drying & Oil Finishing</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       HOW TO ADD MEDIA
+       =========================== -->
+  <div class="upload-guide">
+    <div class="upload-guide-inner">
+      <div>
+        <h3>How to Add Your Photos & Videos</h3>
+        <p>
+          Place your image or video files in the <code>assets/</code> folder, then update the <code>src</code> attribute of each slot. Placeholder tiles will disappear automatically once a valid source is set.
+        </p>
+      </div>
+      <ul class="upload-steps">
+        <li class="upload-step">
+          <div class="upload-num">1</div>
+          <span>Create an <code>assets/</code> folder inside the <code>RePULP/</code> directory</span>
+        </li>
+        <li class="upload-step">
+          <div class="upload-num">2</div>
+          <span>Copy your <code>.jpg</code> / <code>.png</code> / <code>.mp4</code> files into it</span>
+        </li>
+        <li class="upload-step">
+          <div class="upload-num">3</div>
+          <span>In <code>lab.html</code>, set <code>src="assets/your-file.jpg"</code> on the relevant <code>&lt;img&gt;</code></span>
+        </li>
+        <li class="upload-step">
+          <div class="upload-num">4</div>
+          <span>For video: use <code>&lt;video src="assets/file.mp4" controls&gt;</code> or paste a YouTube <code>&lt;iframe&gt;</code></span>
+        </li>
+        <li class="upload-step">
+          <div class="upload-num">5</div>
+          <span>Commit &amp; push — GitHub Pages updates automatically</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <img src="assets/logo.png" alt="RePULP" class="footer-logo-img">
+      <p>Products made from egg cartons<br>and flour paste — back to earth.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="brand.html">Brand Story</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="lab.html">Lab</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Materials</h4>
+      <ul>
+        <li><a href="lab.html#stone">Stone — base pulp</a></li>
+        <li><a href="lab.html#moss">Moss — + green tea</a></li>
+        <li><a href="lab.html#soil">Soil — + coffee grounds</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2026 RePULP. All rights reserved.</p>
+    <p>Made from egg cartons & flour paste — back to earth.</p>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    /* Highlight active nav section on scroll */
+    const sections = ['stone', 'moss', 'soil', 'video'];
+    const navBtns  = document.querySelectorAll('.lab-nav-btn');
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navBtns.forEach(b => b.classList.remove('active'));
+          const active = document.querySelector(`.lab-nav-btn[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { threshold: 0.35 });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  </script>
+</body>
+</html>

@@ -538,6 +538,20 @@
       color: var(--green-dark);
     }
 
+    .modal-lab-link {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 2rem;
+      padding: 0.8rem 1.6rem;
+      background: var(--moss-dark);
+      color: var(--white);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.25s;
+    }
+    .modal-lab-link:hover { background: var(--moss-mid); }
+
     /* ========================
        Responsive
        ======================== */
@@ -565,11 +579,12 @@
 
   <!-- NAV -->
   <nav id="navbar">
-    <div class="nav-logo">Re<span>PULP</span></div>
+    <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="RePULP" class="nav-logo-img"></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="brand.html">Brand</a></li>
       <li><a href="products.html" class="active">Products</a></li>
+      <li><a href="lab.html">Lab</a></li>
     </ul>
   </nav>
 
@@ -578,7 +593,7 @@
     <div class="hero-texture"></div>
     <div class="page-hero-inner">
       <div class="section-label">Product Collection</div>
-      <h1>자연 소재가 빚은<br><em>세 가지 표정</em></h1>
+      <h1>Natural materials shaped into<br><em>three expressions</em></h1>
     </div>
   </section>
 
@@ -607,30 +622,30 @@
   <div class="material-key">
     <div class="material-key-inner">
       <div class="section-label" style="margin-bottom:0.5rem">Material Concept</div>
-      <h3 style="color:var(--text-dark)">세 가지 자연 재질</h3>
+      <h3 style="color:var(--text-dark)">Three Natural Materials</h3>
       <div class="key-grid">
         <div class="key-card">
           <div class="key-swatch stone"></div>
           <div class="key-info">
             <h4>Stone</h4>
-            <div class="key-ingredient">계란판 기본 / No additive</div>
-            <p>계란판 펄프 그대로의 색. 건조 후 자연스럽게 만들어지는 회갈빛 질감. 아무것도 더하지 않은 소재 본연의 표정입니다.</p>
+            <div class="key-ingredient">Base egg carton / No additive</div>
+            <p>The natural colour of egg carton pulp as-is. A grey-brown texture that forms naturally after drying. The true character of the material, with nothing added.</p>
           </div>
         </div>
         <div class="key-card">
           <div class="key-swatch moss"></div>
           <div class="key-info">
             <h4>Moss</h4>
-            <div class="key-ingredient">+ 녹차 분말 / Green Tea Powder</div>
-            <p>말린 녹차 분말을 펄프에 혼합. 자연 색소가 은은한 초록빛을 입히고 미세한 녹차 섬유가 질감을 더합니다.</p>
+            <div class="key-ingredient">+ Green Tea Powder</div>
+            <p>Dried green tea powder blended into the pulp. Natural pigment lends a soft green hue, and fine tea fibres add depth to the texture.</p>
           </div>
         </div>
         <div class="key-card">
           <div class="key-swatch soil"></div>
           <div class="key-info">
             <h4>Soil</h4>
-            <div class="key-ingredient">+ 커피 가루 / Coffee Grounds</div>
-            <p>드립 후 남은 커피 찌꺼기를 펄프에 배합. 짙은 갈빛과 커피 특유의 거친 입자 질감이 흙을 닮은 표면을 만듭니다.</p>
+            <div class="key-ingredient">+ Coffee Grounds</div>
+            <p>Used coffee grounds from drip brewing blended into the pulp. A deep brown tone and the coarse, gritty texture of coffee create a surface that resembles soil.</p>
           </div>
         </div>
       </div>
@@ -642,9 +657,9 @@
     <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2.5rem; flex-wrap:wrap; gap:1rem">
       <div>
         <div class="section-label">All Products</div>
-        <h2 class="section-title" style="margin-bottom:0">제품 컬렉션</h2>
+        <h2 class="section-title" style="margin-bottom:0">Product Collection</h2>
       </div>
-      <p style="font-size:0.82rem; color:var(--text-light)">클릭하면 자세한 정보를 볼 수 있습니다</p>
+      <p style="font-size:0.82rem; color:var(--text-light)">Click any product to view details</p>
     </div>
 
     <div class="products-grid" id="productsGrid">
@@ -659,12 +674,12 @@
               <path d="M30 40 Q40 32 60 32 Q80 32 90 40 L100 90 Q80 86 60 86 Q40 86 20 90 Z" fill="rgba(255,255,255,0.12)"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot stone"></div> Stone</div>
-          <h3>씨앗 화분</h3>
-          <p>생분해 가능한 씨앗 심기용 소형 화분</p>
+          <h3>Seed Pot</h3>
+          <p>A small biodegradable pot for planting seeds</p>
         </div>
       </div>
 
@@ -678,12 +693,12 @@
               <path d="M30 40 Q40 32 60 32 Q80 32 90 40 L100 90 Q80 86 60 86 Q40 86 20 90 Z" fill="rgba(255,255,255,0.12)"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot moss"></div> Moss</div>
-          <h3>씨앗 화분</h3>
-          <p>녹차 분말을 더한 초록빛 씨앗 화분</p>
+          <h3>Seed Pot</h3>
+          <p>A green seed pot with added green tea powder</p>
         </div>
       </div>
 
@@ -698,12 +713,12 @@
               <ellipse cx="60" cy="40" rx="32" ry="16" fill="rgba(0,0,0,0.10)"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot soil"></div> Soil</div>
-          <h3>코스터</h3>
-          <p>커피 찌꺼기가 만든 짙은 흙빛 코스터</p>
+          <h3>Coaster</h3>
+          <p>A deep earth-toned coaster made with coffee grounds</p>
         </div>
       </div>
 
@@ -720,12 +735,12 @@
               <rect x="70" y="12" width="8" height="52" rx="3" fill="rgba(255,255,255,0.28)"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot stone"></div> Stone</div>
-          <h3>펜 홀더</h3>
-          <p>자연 회색빛의 데스크 펜 홀더</p>
+          <h3>Pen Holder</h3>
+          <p>A desk pen holder in natural grey</p>
         </div>
       </div>
 
@@ -740,12 +755,12 @@
               <path d="M20 52 Q40 32 70 30 Q100 32 120 52" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="none"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot moss"></div> Moss</div>
-          <h3>소형 보울</h3>
-          <p>녹차빛 작은 수납 보울</p>
+          <h3>Small Bowl</h3>
+          <p>A small storage bowl in green tea tones</p>
         </div>
       </div>
 
@@ -763,12 +778,12 @@
               <line x1="50" y1="58" x2="50" y2="47" stroke="rgba(200,180,100,0.8)" stroke-width="1.5"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot soil"></div> Soil</div>
-          <h3>캔들 홀더</h3>
-          <p>커피가루 질감의 원통형 캔들 홀더</p>
+          <h3>Candle Holder</h3>
+          <p>A cylindrical candle holder with a coffee grounds texture</p>
         </div>
       </div>
 
@@ -783,12 +798,12 @@
               <ellipse cx="60" cy="40" rx="32" ry="16" fill="rgba(0,0,0,0.10)"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot stone"></div> Stone</div>
-          <h3>코스터</h3>
-          <p>계란판 본연의 중성적인 회색 코스터</p>
+          <h3>Coaster</h3>
+          <p>A neutral grey coaster in the natural tone of egg carton pulp</p>
         </div>
       </div>
 
@@ -803,12 +818,12 @@
               <path d="M20 52 Q40 32 70 30 Q100 32 120 52" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="none"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot soil"></div> Soil</div>
-          <h3>소형 보울</h3>
-          <p>커피 찌꺼기로 깊어진 흙빛 보울</p>
+          <h3>Small Bowl</h3>
+          <p>An earth-toned bowl deepened with coffee grounds</p>
         </div>
       </div>
 
@@ -825,12 +840,12 @@
               <rect x="70" y="12" width="8" height="52" rx="3" fill="rgba(255,255,255,0.28)"/>
             </svg>
           </div>
-          <div class="product-hover-overlay"><div class="hover-cta">자세히 보기</div></div>
+          <div class="product-hover-overlay"><div class="hover-cta">View Details</div></div>
         </div>
         <div class="product-info">
           <div class="product-material-tag"><div class="dot moss"></div> Moss</div>
-          <h3>펜 홀더</h3>
-          <p>녹차 분말로 물든 초록빛 펜 홀더</p>
+          <h3>Pen Holder</h3>
+          <p>A green pen holder tinted with green tea powder</p>
         </div>
       </div>
 
@@ -857,8 +872,8 @@
   <!-- FOOTER -->
   <footer>
     <div>
-      <div class="footer-logo">RePULP</div>
-      <p>계란판과 밀가루풀로<br>자연 소재를 빚는 브랜드</p>
+      <img src="assets/logo.png" alt="RePULP" class="footer-logo-img">
+      <p>A brand that shapes natural materials<br>from egg cartons and flour paste</p>
     </div>
     <div>
       <h4>Navigation</h4>
@@ -866,14 +881,15 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="brand.html">Brand Story</a></li>
         <li><a href="products.html">Products</a></li>
+        <li><a href="lab.html">Lab</a></li>
       </ul>
     </div>
     <div>
       <h4>Materials</h4>
       <ul>
-        <li><a href="#">Stone — 기본 펄프</a></li>
-        <li><a href="#">Moss — + 녹차 분말</a></li>
-        <li><a href="#">Soil — + 커피 가루</a></li>
+        <li><a href="#">Stone — Base pulp</a></li>
+        <li><a href="#">Moss — + Green tea powder</a></li>
+        <li><a href="#">Soil — + Coffee grounds</a></li>
       </ul>
     </div>
   </footer>
@@ -887,172 +903,91 @@
     /* =====================
        Product Data
        ===================== */
+    /* ── Product data (recipe + lab link) ── */
     const PRODUCTS = {
       'seedpot-stone': {
-        name: '씨앗 화분',
-        sub: 'Seed Pot · Stone',
-        material: 'stone',
-        materialLabel: 'Stone — 기본 계란판 펄프',
+        name: 'Seed Pot', sub: 'Seed Pot · Stone',
+        material: 'stone', materialLabel: 'Stone — Base egg carton pulp',
         swatchStyle: 'background: radial-gradient(circle, #D6CBBC, #9A8E7E)',
-        description: '씨앗을 직접 심어 키울 수 있는 소형 화분입니다. 화분이 흙 속에서 분해되면서 씨앗에 영양을 공급합니다. 계란판 펄프 본연의 회갈색이 화분대 위에서 자연스러운 존재감을 만듭니다.',
-        process: [
-          { title: '계란판 수거 & 세척', desc: '지역 수거 파트너에서 받은 계란판을 물에 세척합니다.' },
-          { title: '불리기 & 해리', desc: '물에 1시간 이상 담가 충분히 불린 뒤 손으로 섬유질을 분리합니다.' },
-          { title: '밀가루풀 혼합', desc: '해리된 펄프에 밀가루풀(밀가루 1 : 물 3 비율)을 배합해 성형 가능한 반죽을 만듭니다.' },
-          { title: '틀 성형', desc: '화분 틀에 반죽을 눌러 넣고 균일한 두께로 고르게 정리합니다.' },
-          { title: '자연 건조', desc: '48시간 상온 건조. 오븐이나 히터를 사용하지 않습니다.' },
-          { title: '천연 오일 마감', desc: '들기름 소량으로 발수성 향상. 화학 코팅 없음.' },
-        ],
-        badges: ['100% 천연 재료', '완전 생분해', '무독성 공정', '지역 수거 소재'],
+        desc: 'A biodegradable seed pot. When planted in soil, the pot decomposes and nourishes the seed.',
+        recipe: ['Egg cartons + water → soak 1 hour, then break apart by hand', 'Mix in flour paste (flour 1 : water 3) → knead', 'Press into pot mould → air dry 48h → finish with perilla oil'],
+        labSection: 'stone',
         shape: `<svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="128" rx="45" ry="10" fill="rgba(0,0,0,0.2)"/><path d="M20 90 Q18 115 60 118 Q102 115 100 90 L90 40 Q80 30 60 30 Q40 30 30 40 Z" fill="rgba(150,130,110,0.9)"/><path d="M30 40 Q40 32 60 32 Q80 32 90 40 L100 90 Q80 86 60 86 Q40 86 20 90 Z" fill="rgba(170,150,130,0.7)"/></svg>`
       },
       'seedpot-moss': {
-        name: '씨앗 화분',
-        sub: 'Seed Pot · Moss',
-        material: 'moss',
-        materialLabel: 'Moss — 계란판 펄프 + 녹차 분말',
+        name: 'Seed Pot', sub: 'Seed Pot · Moss',
+        material: 'moss', materialLabel: 'Moss — Egg carton pulp + green tea powder',
         swatchStyle: 'background: radial-gradient(circle, #9DB88A, #4E6B44)',
-        description: '녹차 분말을 혼합한 Moss 소재 씨앗 화분입니다. 녹차의 자연 색소가 은은한 초록빛을 만들고, 녹차 섬유가 질감에 깊이를 더합니다. 허브나 작은 식물을 심어 창가에 두면 식물과 화분이 하나의 자연이 됩니다.',
-        process: [
-          { title: '계란판 수거 & 세척', desc: '지역 수거 파트너에서 받은 계란판을 물에 세척합니다.' },
-          { title: '불리기 & 해리', desc: '물에 담가 섬유질을 분리합니다.' },
-          { title: '녹차 분말 혼합', desc: '말린 녹차 분말을 펄프에 배합합니다. 녹차 비율로 색의 진하기를 조절합니다.' },
-          { title: '밀가루풀 바인딩', desc: '천연 밀가루풀로 결합해 성형 가능한 반죽으로 만듭니다.' },
-          { title: '틀 성형 & 건조', desc: '화분 틀 성형 후 48시간 자연 건조합니다.' },
-          { title: '천연 오일 마감', desc: '들기름으로 표면 마감. 녹차 향이 은은하게 남습니다.' },
-        ],
-        badges: ['100% 천연 재료', '녹차 자연 색소', '완전 생분해', '무독성 공정'],
+        desc: 'A seed pot tinted with a soft green by green tea powder. Tea fibres add depth to the texture.',
+        recipe: ['Break apart egg cartons + blend in 10–15% green tea powder', 'Mix in flour paste → knead (adjust ratio for colour intensity)', 'Press into pot mould → dry 48h → finish with perilla oil'],
+        labSection: 'moss',
         shape: `<svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="128" rx="45" ry="10" fill="rgba(0,0,0,0.2)"/><path d="M20 90 Q18 115 60 118 Q102 115 100 90 L90 40 Q80 30 60 30 Q40 30 30 40 Z" fill="rgba(90,130,80,0.9)"/><path d="M30 40 Q40 32 60 32 Q80 32 90 40 L100 90 Q80 86 60 86 Q40 86 20 90 Z" fill="rgba(120,160,100,0.7)"/></svg>`
       },
       'coaster-soil': {
-        name: '코스터',
-        sub: 'Coaster · Soil',
-        material: 'soil',
-        materialLabel: 'Soil — 계란판 펄프 + 커피 가루',
+        name: 'Coaster', sub: 'Coaster · Soil',
+        material: 'soil', materialLabel: 'Soil — Egg carton pulp + coffee grounds',
         swatchStyle: 'background: radial-gradient(circle, #B0885A, #4C2E14)',
-        description: '드립 커피 후 남은 커피 찌꺼기를 펄프에 섞어 만든 코스터입니다. 커피 고유의 짙은 갈색과 거친 입자 질감이 흙을 닮은 표면을 만들어냅니다. 커피잔을 올려두면 소재와 음료가 어우러지는 미감이 생깁니다.',
-        process: [
-          { title: '커피 찌꺼기 수거', desc: '카페 파트너에서 드립 후 남은 커피 찌꺼기를 수거합니다. 이중 재활용 구조입니다.' },
-          { title: '계란판 해리', desc: '계란판을 물에 풀어 펄프 섬유를 분리합니다.' },
-          { title: '커피 찌꺼기 혼합', desc: '건조된 커피 가루를 펄프에 10~20% 비율로 배합합니다.' },
-          { title: '밀가루풀 바인딩', desc: '천연 밀가루풀을 추가해 일체감 있는 반죽으로 만듭니다.' },
-          { title: '압착 성형', desc: '코스터 틀에 넣고 균일하게 압착해 평평한 표면을 만듭니다.' },
-          { title: '건조 & 오일 마감', desc: '48시간 자연 건조 후 들기름 마감. 발수성이 더해집니다.' },
-        ],
-        badges: ['이중 업사이클', '커피 찌꺼기 재활용', '완전 생분해', '지역 카페 협력'],
+        desc: 'A coaster made with drip coffee grounds. The material echoes the aesthetic of a coffee cup.',
+        recipe: ['Break apart egg cartons + blend in 10–20% dried coffee grounds', 'Bind with flour paste → press into coaster mould', 'Air dry 48h → water-resistant finish with perilla oil'],
+        labSection: 'soil',
         shape: `<svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="72" rx="52" ry="7" fill="rgba(0,0,0,0.2)"/><ellipse cx="60" cy="46" rx="52" ry="30" fill="rgba(100,65,30,0.9)"/><ellipse cx="60" cy="42" rx="52" ry="28" fill="rgba(130,90,50,0.6)"/><ellipse cx="60" cy="40" rx="32" ry="16" fill="rgba(0,0,0,0.12)"/></svg>`
       },
       'penholder-stone': {
-        name: '펜 홀더',
-        sub: 'Pen Holder · Stone',
-        material: 'stone',
-        materialLabel: 'Stone — 기본 계란판 펄프',
+        name: 'Pen Holder', sub: 'Pen Holder · Stone',
+        material: 'stone', materialLabel: 'Stone — Base egg carton pulp',
         swatchStyle: 'background: radial-gradient(circle, #D6CBBC, #9A8E7E)',
-        description: '아무것도 더하지 않은 계란판 펄프 그대로의 색과 질감. 종이 섬유의 거친 표면이 그대로 살아있는 데스크 오거나이저입니다. 자연스러운 회갈색이 어떤 인테리어에도 잘 어울립니다.',
-        process: [
-          { title: '계란판 수거', desc: '지역 수거 파트너에서 계란판을 수거합니다.' },
-          { title: '해리 & 반죽', desc: '충분히 불린 뒤 밀가루풀과 혼합합니다.' },
-          { title: '원통 성형', desc: '원통 틀 안쪽에 반죽을 고르게 눌러 형태를 잡습니다.' },
-          { title: '72시간 건조', desc: '두꺼운 벽 두께를 위해 충분한 건조 시간을 확보합니다.' },
-          { title: '사포 마감', desc: '자연 사포로 표면을 고르게 정리합니다.' },
-          { title: '오일 마감', desc: '들기름으로 발수성 마감. 이것이 유일한 마감재입니다.' },
-        ],
-        badges: ['100% 천연 재료', '오래 쓸수록 멋스러움', '완전 생분해', '무독성'],
+        desc: 'The natural colour of pulp with nothing added. A desk organiser where the fibre grain remains visible.',
+        recipe: ['Break apart egg cartons + mix in flour paste → knead', 'Press dough into the inside of a cylindrical mould → fix shape', 'Air dry 72h → sand finish → coat with perilla oil'],
+        labSection: 'stone',
         shape: `<svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="150" rx="42" ry="8" fill="rgba(0,0,0,0.2)"/><rect x="22" y="40" width="76" height="100" rx="4" fill="rgba(150,130,110,0.85)"/><rect x="22" y="40" width="76" height="14" rx="4" fill="rgba(170,150,130,0.6)"/><rect x="38" y="10" width="8" height="55" rx="3" fill="rgba(200,190,180,0.8)"/><rect x="54" y="5" width="8" height="60" rx="3" fill="rgba(200,190,180,0.75)"/><rect x="70" y="12" width="8" height="52" rx="3" fill="rgba(200,190,180,0.7)"/></svg>`
       },
       'bowl-moss': {
-        name: '소형 보울',
-        sub: 'Small Bowl · Moss',
-        material: 'moss',
-        materialLabel: 'Moss — 계란판 펄프 + 녹차 분말',
+        name: 'Small Bowl', sub: 'Small Bowl · Moss',
+        material: 'moss', materialLabel: 'Moss — Egg carton pulp + green tea powder',
         swatchStyle: 'background: radial-gradient(circle, #9DB88A, #4E6B44)',
-        description: '녹차빛이 스민 얕고 넓은 소형 보울. 소품을 담거나 작은 화분의 받침으로, 또는 그 자체로 장식물로 씁니다. 녹차 분말이 표면에 만드는 미세한 질감 변화가 보울마다 각기 다른 표정을 만듭니다.',
-        process: [
-          { title: '계란판 해리', desc: '계란판을 물에 불려 펄프 섬유를 분리합니다.' },
-          { title: '녹차 분말 배합', desc: '말린 녹차 분말을 배합합니다. 비율에 따라 색 농도가 달라집니다.' },
-          { title: '밀가루풀 혼합', desc: '천연 결합제로 반죽의 점도를 조절합니다.' },
-          { title: '손 성형', desc: '틀 없이 손으로 보울 형태를 빚습니다. 보울마다 유니크한 형태가 생깁니다.' },
-          { title: '자연 건조', desc: '실온에서 2~3일 건조합니다.' },
-          { title: '오일 마감', desc: '들기름으로 표면을 마무리합니다.' },
-        ],
-        badges: ['핸드메이드', '녹차 자연 색소', '각 제품 유니크', '완전 생분해'],
+        desc: 'A shallow, wide bowl in green tea tones. Use for storing small items, as a plant saucer, or as a decorative piece.',
+        recipe: ['Break apart egg cartons + blend in green tea powder (ratio controls colour depth)', 'Mix in flour paste → hand-shape into bowl form', 'Air dry 2–3 days → finish with perilla oil'],
+        labSection: 'moss',
         shape: `<svg viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="92" rx="60" ry="7" fill="rgba(0,0,0,0.2)"/><path d="M15 55 Q12 85 70 88 Q128 85 125 55 Q100 25 70 22 Q40 25 15 55 Z" fill="rgba(80,120,65,0.85)"/><ellipse cx="70" cy="55" rx="55" ry="20" fill="rgba(0,0,0,0.1)"/><path d="M20 52 Q40 32 70 30 Q100 32 120 52" stroke="rgba(160,200,140,0.4)" stroke-width="2" fill="none"/></svg>`
       },
       'candle-soil': {
-        name: '캔들 홀더',
-        sub: 'Candle Holder · Soil',
-        material: 'soil',
-        materialLabel: 'Soil — 계란판 펄프 + 커피 가루',
+        name: 'Candle Holder', sub: 'Candle Holder · Soil',
+        material: 'soil', materialLabel: 'Soil — Egg carton pulp + coffee grounds',
         swatchStyle: 'background: radial-gradient(circle, #B0885A, #4C2E14)',
-        description: '커피 찌꺼기가 만드는 짙고 거친 흙빛 표면. 안에 캔들을 넣으면 빛이 소재를 통과하며 따뜻한 황갈색 빛을 퍼뜨립니다. 커피 가루 특유의 미세한 구멍들이 빛을 산란시켜 독특한 조명 효과를 냅니다.',
-        process: [
-          { title: '커피 찌꺼기 수거 & 건조', desc: '카페에서 수거한 커피 찌꺼기를 햇볕에 건조시킵니다.' },
-          { title: '계란판 펄프 해리', desc: '계란판을 물에 풀어 섬유를 분리합니다.' },
-          { title: '커피 가루 혼합', desc: '건조된 커피 가루를 15~25% 비율로 펄프에 섞습니다.' },
-          { title: '밀가루풀 바인딩', desc: '천연 결합제로 반죽의 강도를 높입니다.' },
-          { title: '원통 성형', desc: '원통 틀 안쪽에 반죽을 붙여 얇은 벽을 만듭니다. 빛이 투과되도록 벽 두께를 조절합니다.' },
-          { title: '건조 & 마감', desc: '72시간 자연 건조. 들기름으로 발수 마감.' },
-        ],
-        badges: ['이중 업사이클', '투광 조명 효과', '카페 협력 소재', '완전 생분해'],
+        desc: 'The fine pores of the coffee grounds scatter light, spreading a warm amber glow.',
+        recipe: ['Break apart egg cartons + blend in 15–25% dried coffee grounds', 'Bind with flour paste → form thin walls in cylindrical mould (keep light-transmitting thickness)', 'Dry 72h → finish with perilla oil'],
+        labSection: 'soil',
         shape: `<svg viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="50" cy="152" rx="38" ry="7" fill="rgba(0,0,0,0.2)"/><path d="M18 120 Q16 145 50 148 Q84 145 82 120 L78 65 Q68 58 50 58 Q32 58 22 65 Z" fill="rgba(90,55,25,0.85)"/><ellipse cx="50" cy="65" rx="28" ry="9" fill="rgba(0,0,0,0.12)"/><ellipse cx="50" cy="38" rx="5" ry="8" fill="rgba(255,220,100,0.8)"/><ellipse cx="50" cy="42" rx="3" ry="5" fill="rgba(255,160,40,0.9)"/><line x1="50" y1="58" x2="50" y2="47" stroke="rgba(200,180,100,0.9)" stroke-width="1.5"/></svg>`
       },
       'coaster-stone': {
-        name: '코스터',
-        sub: 'Coaster · Stone',
-        material: 'stone',
-        materialLabel: 'Stone — 기본 계란판 펄프',
+        name: 'Coaster', sub: 'Coaster · Stone',
+        material: 'stone', materialLabel: 'Stone — Base egg carton pulp',
         swatchStyle: 'background: radial-gradient(circle, #D6CBBC, #9A8E7E)',
-        description: '계란판 펄프 그대로. 가장 중성적이고 차분한 표정의 코스터입니다. 종이 섬유의 결이 그대로 살아있고 표면에서 계란판이 지닌 독특한 보풀 질감을 볼 수 있습니다. 어떤 색의 컵에도 잘 어울립니다.',
-        process: [
-          { title: '계란판 수거', desc: '지역 파트너에서 계란판 수거.' },
-          { title: '세척 & 해리', desc: '물에 불려 섬유질 분리.' },
-          { title: '밀가루풀 혼합', desc: '천연 결합제 배합.' },
-          { title: '압착 성형', desc: '코스터 틀에 균일하게 압착.' },
-          { title: '자연 건조', desc: '48시간 상온 건조.' },
-          { title: '오일 마감', desc: '들기름으로 발수성 마감.' },
-        ],
-        badges: ['100% 천연 재료', '펄프 본연의 질감', '완전 생분해', '무독성'],
+        desc: 'The neutral grey of natural pulp. A calm coaster where the fluffy fibre texture lives on.',
+        recipe: ['Break apart egg cartons + mix in flour paste → knead', 'Press evenly into coaster mould', 'Air dry 48h → water-resistant finish with perilla oil'],
+        labSection: 'stone',
         shape: `<svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="72" rx="52" ry="7" fill="rgba(0,0,0,0.2)"/><ellipse cx="60" cy="46" rx="52" ry="30" fill="rgba(160,145,125,0.9)"/><ellipse cx="60" cy="42" rx="52" ry="28" fill="rgba(185,170,150,0.6)"/><ellipse cx="60" cy="40" rx="32" ry="16" fill="rgba(0,0,0,0.1)"/></svg>`
       },
       'bowl-soil': {
-        name: '소형 보울',
-        sub: 'Small Bowl · Soil',
-        material: 'soil',
-        materialLabel: 'Soil — 계란판 펄프 + 커피 가루',
+        name: 'Small Bowl', sub: 'Small Bowl · Soil',
+        material: 'soil', materialLabel: 'Soil — Egg carton pulp + coffee grounds',
         swatchStyle: 'background: radial-gradient(circle, #B0885A, #4C2E14)',
-        description: '커피 찌꺼기로 깊고 풍부한 갈색을 입힌 소형 보울. 커피 가루의 거친 입자가 표면 곳곳에 보이며 촉각적으로도 재미있는 질감을 만듭니다. 커피 원두 같은 진한 향이 처음 며칠간 은은하게 납니다.',
-        process: [
-          { title: '커피 찌꺼기 수거 & 건조', desc: '카페 파트너에서 수거 후 건조합니다.' },
-          { title: '계란판 해리', desc: '계란판을 물에 풀어 펄프로 만듭니다.' },
-          { title: '커피 가루 혼합', desc: '20% 비율의 커피 가루를 펄프에 섞습니다.' },
-          { title: '밀가루풀 바인딩', desc: '천연 결합제로 반죽합니다.' },
-          { title: '손 성형', desc: '손으로 직접 보울 형태를 빚습니다. 각각 유니크한 형태입니다.' },
-          { title: '건조 & 오일 마감', desc: '자연 건조 후 들기름으로 마무리.' },
-        ],
-        badges: ['이중 업사이클', '커피 향 잔향', '핸드메이드', '완전 생분해'],
+        desc: 'A bowl where coffee grounds create a deep earth tone and coarse texture. A subtle coffee scent lingers at first.',
+        recipe: ['Break apart egg cartons + blend in 20% dried coffee grounds', 'Bind with flour paste → hand-shape into bowl form', 'Air dry → finish with perilla oil'],
+        labSection: 'soil',
         shape: `<svg viewBox="0 0 140 100" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="70" cy="92" rx="60" ry="7" fill="rgba(0,0,0,0.2)"/><path d="M15 55 Q12 85 70 88 Q128 85 125 55 Q100 25 70 22 Q40 25 15 55 Z" fill="rgba(100,65,35,0.88)"/><ellipse cx="70" cy="55" rx="55" ry="20" fill="rgba(0,0,0,0.1)"/><path d="M20 52 Q40 32 70 30 Q100 32 120 52" stroke="rgba(180,130,80,0.4)" stroke-width="2" fill="none"/></svg>`
       },
       'penholder-moss': {
-        name: '펜 홀더',
-        sub: 'Pen Holder · Moss',
-        material: 'moss',
-        materialLabel: 'Moss — 계란판 펄프 + 녹차 분말',
+        name: 'Pen Holder', sub: 'Pen Holder · Moss',
+        material: 'moss', materialLabel: 'Moss — Egg carton pulp + green tea powder',
         swatchStyle: 'background: radial-gradient(circle, #9DB88A, #4E6B44)',
-        description: '녹차 분말이 섞인 은은한 초록빛 펜 홀더. 책상 위에 두면 식물 한 그루를 둔 것 같은 자연스러운 청량감이 납니다. 녹차 섬유의 가느다란 결이 표면에 무늬를 만들어 보울마다 다른 패턴이 생깁니다.',
-        process: [
-          { title: '계란판 수거 & 해리', desc: '지역 파트너에서 수거 후 펄프로 분리합니다.' },
-          { title: '녹차 분말 배합', desc: '말린 녹차 분말을 10~15% 비율로 혼합합니다.' },
-          { title: '밀가루풀 바인딩', desc: '천연 결합제를 배합합니다.' },
-          { title: '원통 틀 성형', desc: '원통 안쪽에 반죽을 균일하게 눌러 담습니다.' },
-          { title: '72시간 건조', desc: '충분한 강도를 위해 긴 건조 시간을 확보합니다.' },
-          { title: '자연 마감', desc: '들기름으로 발수 마감. 녹차 특유의 미세한 향이 남습니다.' },
-        ],
-        badges: ['녹차 자연 색소', '핸드메이드 패턴', '완전 생분해', '무독성'],
+        desc: 'A green pen holder where the fine grain of green tea fibres creates a patterned surface.',
+        recipe: ['Break apart egg cartons + blend in 10–15% green tea powder', 'Bind with flour paste → form in cylindrical mould', 'Dry 72h → finish with perilla oil (faint tea scent remains)'],
+        labSection: 'moss',
         shape: `<svg viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="150" rx="42" ry="8" fill="rgba(0,0,0,0.2)"/><rect x="22" y="40" width="76" height="100" rx="4" fill="rgba(75,115,60,0.85)"/><rect x="22" y="40" width="76" height="14" rx="4" fill="rgba(110,155,90,0.6)"/><rect x="38" y="10" width="8" height="55" rx="3" fill="rgba(180,210,160,0.8)"/><rect x="54" y="5" width="8" height="60" rx="3" fill="rgba(180,210,160,0.75)"/><rect x="70" y="12" width="8" height="52" rx="3" fill="rgba(180,210,160,0.7)"/></svg>`
       },
     };
 
-    /* material bg helpers */
     const MATERIAL_BG = {
       stone: 'radial-gradient(ellipse 70% 70% at 30% 30%, #D6CBBC 0%, #B4A490 40%, #9A8E7E 80%, #887870 100%)',
       moss:  'radial-gradient(ellipse 70% 70% at 30% 30%, #B0C99E 0%, #7EA06A 40%, #5A7A4A 80%, #3E5C35 100%)',
@@ -1072,19 +1007,12 @@
       visual.style.background = MATERIAL_BG[data.material];
       shape.innerHTML = data.shape;
 
-      const stepsHTML = data.process.map((s, i) => `
+      const recipeHTML = data.recipe.map((step, i) => `
         <li class="process-step">
-          <div class="process-num">${i+1}</div>
-          <div class="process-text">
-            <h5>${s.title}</h5>
-            <p>${s.desc}</p>
-          </div>
+          <div class="process-num">${i + 1}</div>
+          <div class="process-text"><p>${step}</p></div>
         </li>
       `).join('');
-
-      const badgesHTML = data.badges.map(b =>
-        `<span class="modal-badge">${b}</span>`
-      ).join('');
 
       body.innerHTML = `
         <div class="modal-material-tag">
@@ -1094,11 +1022,12 @@
         <h2>${data.name}</h2>
         <div class="modal-sub">${data.sub}</div>
         <div class="modal-divider"></div>
-        <p>${data.description}</p>
-        <div class="modal-section-title">제작 과정</div>
-        <ul class="process-steps">${stepsHTML}</ul>
-        <div class="modal-section-title">지속가능성</div>
-        <div class="modal-badges">${badgesHTML}</div>
+        <p>${data.desc}</p>
+        <div class="modal-section-title">Recipe</div>
+        <ul class="process-steps">${recipeHTML}</ul>
+        <a href="lab.html#${data.labSection}" class="modal-lab-link">
+          View making photos &amp; videos in the Lab →
+        </a>
       `;
 
       overlay.classList.add('active');
